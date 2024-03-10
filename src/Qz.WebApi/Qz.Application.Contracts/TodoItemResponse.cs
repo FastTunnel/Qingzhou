@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Qz.Application.Contracts
 {
-    public interface IWeatherHandler
+    public class TodoItemResponse
     {
-        public Task<IEnumerable<WeatherAggregateRoot>> Handle(WeatherRequest request, CancellationToken cancellationToken);
+        public TodoDto TodoInfo {  get; set; }
     }
 }

@@ -9,20 +9,20 @@ namespace Qz.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class TodoItemController : ControllerBase
     {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<TodoItemController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public TodoItemController(ILogger<TodoItemController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<WeatherResponse> Get([FromServices] IMediator mediator)
+        public async Task<TodoItemResponse> Get([FromServices] IMediator mediator,[FromQuery] TodoItemRequest request)
         {
-            return await mediator.Send(new WeatherRequest());
+            return await mediator.Send(request);
         }
 
         [HttpPost(Name = "GetWeatherForecast")]
