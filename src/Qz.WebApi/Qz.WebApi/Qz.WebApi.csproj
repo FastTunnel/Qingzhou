@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qz.AppService\Qz.AppService.csproj" />
+    <ProjectReference Include="..\Qz.AppService\Qz.Application.csproj" />
   </ItemGroup>
 
 </Project>

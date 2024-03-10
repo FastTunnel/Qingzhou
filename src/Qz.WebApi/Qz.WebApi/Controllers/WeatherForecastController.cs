@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Qz.Application.Contracts;
 using Qz.AppService.Queries;
 using Qz.Domain;
 using System.Net.NetworkInformation;
@@ -19,9 +20,9 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IEnumerable<WeatherForecast>> Get([FromServices] IMediator mediator)
+        public async Task<WeatherResponse> Get([FromServices] IMediator mediator)
         {
-            return await mediator.Send(new Weather());
+            return await mediator.Send(new WeatherRequest());
         }
 
         [HttpPost(Name = "GetWeatherForecast")]

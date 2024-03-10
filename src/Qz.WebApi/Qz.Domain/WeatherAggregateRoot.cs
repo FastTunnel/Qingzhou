@@ -1,6 +1,6 @@
 namespace Qz.Domain
 {
-    public class WeatherForecast
+    public class WeatherAggregateRoot
     {
         public DateOnly Date { get; set; }
 
