@@ -20,7 +20,7 @@ namespace Qz.Persistence
 
         public void Save(TodoItem item)
         {
-            // todo
+            // todo 保存数据到数据库
         }
     }
 }

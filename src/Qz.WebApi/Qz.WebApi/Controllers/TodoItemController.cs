@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Contracts;
+using Qz.Application.Contracts.Base;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qz.WebApi.Controllers
