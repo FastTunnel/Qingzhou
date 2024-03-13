@@ -1,17 +1,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Contracts;
-using Qz.AppService.Queries;
-using Qz.Domain;
-using System.Net.NetworkInformation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Qz.WebApi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class TodoItemController : ControllerBase
+    public class TodoItemController : BaseController
     {
-
         private readonly ILogger<TodoItemController> _logger;
 
         public TodoItemController(ILogger<TodoItemController> logger)
@@ -19,16 +14,28 @@ namespace Qz.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<TodoItemResponse> Get([FromServices] IMediator mediator,[FromQuery] TodoItemRequest request)
+        [HttpGet]
+        public async Task<QzResponse> Get([FromServices] IMediator mediator, [Range(1, double.MaxValue)] long Id)
         {
-            return await mediator.Send(request);
+            return Success(await mediator.Send(new TodoItemRequest { Id = Id }));
         }
 
-        [HttpPost(Name = "GetWeatherForecast")]
-        public void Post()
+        [HttpPut]
+        public QzResponse Put(TodoDto item)
         {
+            return Success($"insert");
+        }
 
+        [HttpPost]
+        public QzResponse Post(TodoDto item)
+        {
+            return Success($"updated");
+        }
+
+        [HttpDelete]
+        public QzResponse Delete([Range(1, double.MaxValue)] long Id)
+        {
+            return Success($"deleted");
         }
     }
 }

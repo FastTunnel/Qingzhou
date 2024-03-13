@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Qz.AppService.Queries;
+using Qz.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
+
+builder.Services.AddSingleton<TodoItemRepository>();
 
 var app = builder.Build();
 
