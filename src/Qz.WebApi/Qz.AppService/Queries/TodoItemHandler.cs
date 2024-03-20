@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using Qz.Application.Contracts;
+using Qz.Application.Contracts.Dtos;
+using Qz.Application.Contracts.Interfaces;
 using Qz.Domain;
 using Qz.Persistence;
 

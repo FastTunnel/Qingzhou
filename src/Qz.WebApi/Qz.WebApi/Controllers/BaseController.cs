@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Contracts.Base;
+using System.Diagnostics;
 
 namespace Qz.WebApi.Controllers
 {
@@ -14,7 +15,8 @@ namespace Qz.WebApi.Controllers
             {
                 Success = true,
                 Data = data,
-                message = msg
+                message = msg,
+                traceId = Request.HttpContext.TraceIdentifier
             };
         }
 
@@ -25,7 +27,8 @@ namespace Qz.WebApi.Controllers
             {
                 Success = false,
                 Data = data,
-                message = msg
+                message = msg,
+                traceId = Request.HttpContext.TraceIdentifier
             };
         }
     }

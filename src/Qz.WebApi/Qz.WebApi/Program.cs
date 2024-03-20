@@ -1,17 +1,34 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Qz.Application.Contracts.Base;
 using Qz.AppService.Queries;
 using Qz.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehaviorOptions options)
+{
+    options.InvalidModelStateResponseFactory = delegate (ActionContext context)
+    {
+        string arg = string.Join('\n', context.ModelState.Select<KeyValuePair<string, ModelStateEntry>, string>((KeyValuePair<string, ModelStateEntry> x) => x.Value.Errors.FirstOrDefault()?.ErrorMessage));
+        return new JsonResult(new QzResponse
+        {
+            Success = false,
+            message = arg,
+            traceId = context.HttpContext.TraceIdentifier
+        });
+    };
+});
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
+
+builder.Services.AddTransient<UserRepository>();
 
 builder.Services.AddSingleton<TodoItemRepository>();
 

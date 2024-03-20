@@ -1,25 +1,18 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Qz.Application.Contracts;
 using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Dtos;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qz.WebApi.Controllers
 {
-    public class TodoItemController : BaseController
+    public class UserController : BaseController
     {
-        private readonly ILogger<TodoItemController> _logger;
+        private readonly ILogger<UserController> _logger;
 
-        public TodoItemController(ILogger<TodoItemController> logger)
+        public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
-        }
-
-        [HttpGet]
-        public async Task<QzResponse> Get([FromServices] IMediator mediator, [Range(1, double.MaxValue)] long Id)
-        {
-            return Success(await mediator.Send(new TodoItemRequest { Id = Id }));
         }
 
         [HttpPut]

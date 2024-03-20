@@ -15,6 +15,8 @@ namespace Qz.Application.Contracts.Base
         public object? Data { get; set; }
 
         public string? message { get; set; }
+
+        public string traceId { get; set; }
     }
 
     public enum ErrorCode
