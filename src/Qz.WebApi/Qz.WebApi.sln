@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qz.Publisher", "Qz.Publishe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{4813AF78-E797-4574-AA2D-DBA44507679B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qz.Application.Contracts", "Qz.Application.Contracts\Qz.Application.Contracts.csproj", "{99694B1A-ACD1-4642-B66A-845520CFE415}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qz.Application.Contracts", "Qz.Application.Contracts\Qz.Application.Contracts.csproj", "{99694B1A-ACD1-4642-B66A-845520CFE415}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qz.Utility", "Qz.Utility\Qz.Utility.csproj", "{6B61F2A1-46E4-4A32-A505-5A1AA8641E46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{99694B1A-ACD1-4642-B66A-845520CFE415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99694B1A-ACD1-4642-B66A-845520CFE415}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99694B1A-ACD1-4642-B66A-845520CFE415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B61F2A1-46E4-4A32-A505-5A1AA8641E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B61F2A1-46E4-4A32-A505-5A1AA8641E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B61F2A1-46E4-4A32-A505-5A1AA8641E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B61F2A1-46E4-4A32-A505-5A1AA8641E46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{E7CFC8E2-99CB-4EB2-A416-AEB21D35540C} = {BAD4D989-95C9-4E59-A64B-6AE432BB68E8}
 		{2B0B0FBD-C0AF-4F0B-A72F-F7F8E21FE720} = {BAD4D989-95C9-4E59-A64B-6AE432BB68E8}
 		{99694B1A-ACD1-4642-B66A-845520CFE415} = {4813AF78-E797-4574-AA2D-DBA44507679B}
+		{6B61F2A1-46E4-4A32-A505-5A1AA8641E46} = {BAD4D989-95C9-4E59-A64B-6AE432BB68E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76A1F28A-BA3B-4DC9-A7EB-BCA0B6397FC6}

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Qz.Application.Contracts.Base;
 using Qz.AppService.Queries;
 using Qz.Persistence;
+using WebApi.YZGJ.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +17,8 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
         return new JsonResult(new QzResponse
         {
             Success = false,
-            message = arg,
-            traceId = context.HttpContext.TraceIdentifier
+            Message = arg,
+            TraceId = context.HttpContext.TraceIdentifier
         });
     };
 });
@@ -28,8 +29,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
 
+// ×¢²áÈÝÆ÷
+builder.Services.AddTransient<CustomExceptionFilterAttribute>();
 builder.Services.AddTransient<UserRepository>();
-
+builder.Services.AddTransient<TeamRepository>();
 builder.Services.AddSingleton<TodoItemRepository>();
 
 var app = builder.Build();

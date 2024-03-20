@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain
+namespace Qz.Domain.Domains
 {
     public class User
     {
         public long Id { get; set; }
 
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        public DateTime  RegTime { get; set; }
+        public required DateTime RegTime { get; set; }
 
         public bool CheckPass(string password)
         {

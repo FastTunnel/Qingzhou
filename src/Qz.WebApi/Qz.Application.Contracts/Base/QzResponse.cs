@@ -8,15 +8,15 @@ namespace Qz.Application.Contracts.Base
 {
     public class QzResponse
     {
-        public bool Success { get; set; }
+        public required bool Success { get; set; }
 
         public ErrorCode Code { get; set; } = 0;
 
         public object? Data { get; set; }
 
-        public string? message { get; set; }
+        public string? Message { get; set; }
 
-        public string traceId { get; set; }
+        public required string TraceId { get; set; }
     }
 
     public enum ErrorCode

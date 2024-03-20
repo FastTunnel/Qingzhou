@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Qz.Domain.Domains;
 
-namespace Qz.Domain
+namespace Qz.Domain.Interfaces
 {
     public interface ITodoItemRepository
     {

@@ -16,4 +16,8 @@ namespace Qz.Application.Contracts.Interfaces
     public interface ILoginHandler : IRequestHandler<LoginRequest, LoginResponse>
     {
     }
+
+    public interface IAddTeamHandler : IRequestHandler<AddTeamRequest, AddTeamResponse>
+    {
+    }
 }
