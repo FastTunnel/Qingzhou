@@ -10,4 +10,10 @@
 	  <ProjectReference Include="..\Qz.Utility\Qz.Utility.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Exceptions\" />
+	  <Folder Include="Entitys\" />
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
 </Project>
