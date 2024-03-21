@@ -5,6 +5,7 @@ using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Repositorys;
 using Qz.AppService.Queries;
 using Qz.Persistence;
+using Qz.WebApi.Services;
 using WebApi.YZGJ.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
 
 builder.Services.AddTransient<CustomExceptionFilterAttribute>();
+
+// 后台任务
+builder.Services.AddHostedService<MyBackgroundService>();
+
+// 分布式缓存，先用内存缓存代替
+builder.Services.AddDistributedMemoryCache();
 
 // 注册容器
 builder.Services.AddTransient<IUserRepository, UserRepository>();

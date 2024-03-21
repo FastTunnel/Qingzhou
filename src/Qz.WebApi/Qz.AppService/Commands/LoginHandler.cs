@@ -1,4 +1,5 @@
-﻿using Qz.Application.Contracts.Dtos;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Qz.Application.Contracts.Dtos;
 using Qz.Application.Contracts.Handlers;
 using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
@@ -13,10 +14,12 @@ namespace Qz.Application.Commands
     public class LoginHandler : ILoginHandler
     {
         readonly IUserRepository userRepository;
+        readonly IDistributedCache distributedCache;
 
-        public LoginHandler(IUserRepository userRepository)
+        public LoginHandler(IUserRepository userRepository, IDistributedCache distributedCache)
         {
             this.userRepository = userRepository;
+            this.distributedCache = distributedCache;
         }
 
         public Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)

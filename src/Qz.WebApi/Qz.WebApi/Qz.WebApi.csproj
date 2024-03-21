@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Qz.Gateway\Qz.Gateway.csproj" />
     <ProjectReference Include="..\Qz.Persistence\Qz.Persistence.csproj" />
     <ProjectReference Include="..\Qz.Publisher\Qz.Publisher.csproj" />
+    <ProjectReference Include="..\Qz.Utility\Qz.Utility.csproj" />
   </ItemGroup>
 
 </Project>
