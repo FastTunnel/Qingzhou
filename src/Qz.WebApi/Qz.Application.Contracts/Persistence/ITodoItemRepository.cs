@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Qz.Domain.Domains;
 
-namespace Qz.Domain.Interfaces
+namespace Qz.Application.Contracts.Repositorys
 {
     public interface ITodoItemRepository
     {

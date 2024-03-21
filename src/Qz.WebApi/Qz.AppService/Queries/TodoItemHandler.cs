@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Qz.Application.Contracts.Dtos;
-using Qz.Application.Contracts.Interfaces;
+using Qz.Application.Contracts.Handlers;
+using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
-using Qz.Persistence;
 
 namespace Qz.AppService.Queries
 {
     public class TodoItemHandler : ITodoItemHandler
     {
-        readonly TodoItemRepository todoItemRepository;
+        readonly ITodoItemRepository todoItemRepository;
 
-        public TodoItemHandler(TodoItemRepository todoItemRepository)
+        public TodoItemHandler(ITodoItemRepository todoItemRepository)
         {
             this.todoItemRepository = todoItemRepository;
         }

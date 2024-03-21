@@ -1,5 +1,5 @@
-﻿using Qz.Domain.Domains;
-using Qz.Domain.Interfaces;
+﻿using Qz.Application.Contracts.Repositorys;
+using Qz.Domain.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;

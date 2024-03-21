@@ -1,7 +1,7 @@
 ﻿using Qz.Application.Contracts.Dtos;
-using Qz.Application.Contracts.Interfaces;
+using Qz.Application.Contracts.Handlers;
+using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
-using Qz.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +12,9 @@ namespace Qz.Application.Commands
 {
     public class LoginHandler : ILoginHandler
     {
-        readonly UserRepository userRepository;
+        readonly IUserRepository userRepository;
 
-        public LoginHandler(UserRepository userRepository)
+        public LoginHandler(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }

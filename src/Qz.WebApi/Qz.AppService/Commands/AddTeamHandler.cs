@@ -1,8 +1,8 @@
 ﻿using Qz.Application.Contracts.Dtos;
-using Qz.Application.Contracts.Interfaces;
+using Qz.Application.Contracts.Handlers;
+using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
 using Qz.Domain.Domains;
-using Qz.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,9 @@ namespace Qz.Application.Commands
 {
     public class AddTeamHandler : IAddTeamHandler
     {
-        readonly TeamRepository teamRepository;
-        public AddTeamHandler(TeamRepository teamRepository)
+        readonly ITeamRepository teamRepository;
+
+        public AddTeamHandler(ITeamRepository teamRepository)
         {
             this.teamRepository = teamRepository;
         }

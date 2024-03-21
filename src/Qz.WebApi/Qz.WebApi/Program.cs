@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Qz.Application.Contracts.Base;
+using Qz.Application.Contracts.Repositorys;
 using Qz.AppService.Queries;
 using Qz.Persistence;
 using WebApi.YZGJ.Filters;
@@ -29,11 +30,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
 
-// ×¢²áÈÝÆ÷
 builder.Services.AddTransient<CustomExceptionFilterAttribute>();
-builder.Services.AddTransient<UserRepository>();
-builder.Services.AddTransient<TeamRepository>();
-builder.Services.AddSingleton<TodoItemRepository>();
+
+// ×¢²áÈÝÆ÷
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ITeamRepository, TeamRepository>();
+builder.Services.AddSingleton<ITodoItemRepository, TodoItemRepository>();
 
 var app = builder.Build();
 

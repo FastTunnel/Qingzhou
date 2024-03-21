@@ -1,4 +1,5 @@
-﻿using Qz.Domain.Domains;
+﻿using Qz.Application.Contracts.Repositorys;
+using Qz.Domain.Domains;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Qz.Persistence
 {
-    public class TeamRepository
+    public class TeamRepository : ITeamRepository
     {
         public Team AddTeam(Team team)
         {

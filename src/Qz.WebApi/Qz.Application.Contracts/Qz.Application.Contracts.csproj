@@ -9,7 +9,7 @@
 		<PackageReference Include="MediatR" Version="12.2.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Qz.Domain\Qz.Domain.csproj" />
+	  <ProjectReference Include="..\Qz.Domain\Qz.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

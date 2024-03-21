@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Qz.Domain;
 
 namespace Qz.Application.Contracts.Dtos
 {
