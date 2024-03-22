@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Repositorys;
 using Qz.AppService.Queries;
-using Qz.Persistence;
+using Qz.Persistence.Repositorys;
 using Qz.WebApi.Services;
 using WebApi.YZGJ.Filters;
 

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Persistence
+namespace Qz.Persistence.Repositorys
 {
     public class TeamRepository : ITeamRepository
     {

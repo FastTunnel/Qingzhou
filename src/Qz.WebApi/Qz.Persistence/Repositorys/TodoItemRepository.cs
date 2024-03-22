@@ -1,13 +1,14 @@
 ﻿using Qz.Application.Contracts.Repositorys;
 using Qz.Domain.Domains;
 using Qz.Domain.Types;
+using Qz.Persistence.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Persistence
+namespace Qz.Persistence.Repositorys
 {
     public class TodoItemRepository : ITodoItemRepository
     {
@@ -23,12 +24,12 @@ namespace Qz.Persistence
 
         public TodoItem Find(Identifier id)
         {
-            return new TodoItem()
+            return new TodoItemDO()
             {
-                Id = id,
+                Id = 10000,
                 Title = "ddd-sample",
                 Summary = "Summary"
-            };
+            }.ToTodoItem();
         }
 
         public void Remove(TodoItem aggregate)
