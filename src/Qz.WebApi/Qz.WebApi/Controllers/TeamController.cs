@@ -21,7 +21,7 @@ namespace Qz.WebApi.Controllers
         [HttpPut]
         public async Task<QzResponse> Put(AddTeamRequest request)
         {
-            request.UserId = CurrentUser.Id;
+            request.UserId = CurrentUser.Id.Value;
             return Success(await mediator.Send(request));
         }
 

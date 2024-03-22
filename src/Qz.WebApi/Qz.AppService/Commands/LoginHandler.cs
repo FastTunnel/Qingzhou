@@ -24,7 +24,7 @@ namespace Qz.Application.Commands
 
         public Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
-            var user = userRepository.Find(request.Email);
+            var user = userRepository.FindByEmail(request.Email);
             if (user == null)
             {
                 throw new Exception("账号或密码错误");

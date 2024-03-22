@@ -3,6 +3,7 @@ using Qz.Application.Contracts.Dtos;
 using Qz.Application.Contracts.Handlers;
 using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
+using Qz.Domain.Types;
 
 namespace Qz.AppService.Queries
 {
@@ -17,7 +18,7 @@ namespace Qz.AppService.Queries
 
         public Task<TodoItemResponse> Handle(TodoItemRequest request, CancellationToken cancellationToken)
         {
-            var res = todoItemRepository.Fine(request.Id);
+            var res = todoItemRepository.Find(new Identifier(request.Id));
 
             return Task.FromResult(new TodoItemResponse
             {

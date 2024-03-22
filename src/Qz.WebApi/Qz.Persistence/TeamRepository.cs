@@ -1,5 +1,7 @@
 ﻿using Qz.Application.Contracts.Repositorys;
+using Qz.Domain.DomainPrimitive;
 using Qz.Domain.Domains;
+using Qz.Domain.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,20 @@ namespace Qz.Persistence
 {
     public class TeamRepository : ITeamRepository
     {
-        public Team AddTeam(Team team)
+
+        public void Attach(Team aggregate)
         {
-            team.Id = 1;
-            return team;
+            throw new NotImplementedException();
         }
 
-        public Team Find(long id)
+        public void Detach(Team aggregate)
         {
-            return new Team
+            throw new NotImplementedException();
+        }
+
+        public TeamDo Find(long id)
+        {
+            return new TeamDo
             {
                 Id = id,
                 Name = "",
@@ -26,6 +33,28 @@ namespace Qz.Persistence
                 CreatedTime = DateTime.Now,
                 CreateUserId = 1,
             };
+        }
+
+        public Team Find(Identifier id)
+        {
+            return new Team
+            {
+                Id = id,
+                Name = new TeamName("测试"),
+                Description = "",
+                CreatedTime = DateTime.Now,
+                CreateUserId = 1,
+            };
+        }
+
+        public void Remove(Team aggregate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(Team aggregate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

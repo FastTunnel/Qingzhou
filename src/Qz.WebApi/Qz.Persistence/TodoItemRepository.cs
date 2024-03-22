@@ -1,5 +1,6 @@
 ﻿using Qz.Application.Contracts.Repositorys;
 using Qz.Domain.Domains;
+using Qz.Domain.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,35 @@ namespace Qz.Persistence
 {
     public class TodoItemRepository : ITodoItemRepository
     {
-        public TodoItem Fine(long itemid)
+        public void Attach(TodoItem aggregate)
         {
-            return new TodoItem() { 
-                Id = itemid,
+            throw new NotImplementedException();
+        }
+
+        public void Detach(TodoItem aggregate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TodoItem Find(Identifier id)
+        {
+            return new TodoItem()
+            {
+                Id = id,
                 Title = "ddd-sample",
                 Summary = "Summary"
             };
         }
 
-        public void Save(TodoItem item)
+        public void Remove(TodoItem aggregate)
         {
-            // todo 保存数据到数据库
+            throw new NotImplementedException();
+        }
+
+
+        public void Save(TodoItem aggregate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

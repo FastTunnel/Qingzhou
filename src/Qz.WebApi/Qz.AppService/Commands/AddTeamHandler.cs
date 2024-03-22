@@ -1,7 +1,9 @@
-﻿using Qz.Application.Contracts.Dtos;
+﻿using Qz.Application.Contracts.Assemblers;
+using Qz.Application.Contracts.Dtos;
 using Qz.Application.Contracts.Handlers;
 using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
+using Qz.Domain.DomainPrimitive;
 using Qz.Domain.Domains;
 using System;
 using System.Collections.Generic;
@@ -24,14 +26,14 @@ namespace Qz.Application.Commands
         {
             var team = new Team()
             {
-                Name = request.Name,
+                Name = new TeamName(request.Name),
                 CreatedTime = DateTime.UtcNow,
                 CreateUserId = 1,
                 Description = request.Description,
             };
 
-            team = teamRepository.AddTeam(team);
-            return Task.FromResult(new AddTeamResponse { TeamId = team.Id });
+            teamRepository.Save(team);
+            return Task.FromResult(team.ToAddTeamResponse());
         }
     }
 }

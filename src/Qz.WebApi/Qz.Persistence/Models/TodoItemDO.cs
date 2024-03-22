@@ -1,6 +1,6 @@
 namespace Qz.Domain.Domains
 {
-    public class TodoItem
+    public class TodoItemDO
     {
         public long Id { get; set; }
 

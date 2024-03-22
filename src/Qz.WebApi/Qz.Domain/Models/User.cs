@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Qz.Domain.Repository.Base;
+using Qz.Domain.Types;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Qz.Domain.Domains
 {
-    public class User
+    public class User : Aggregate<Types.Identifier>
     {
-        public long Id { get; set; }
+        public Types.Identifier Id { get; set; }
 
         public required string Name { get; set; }
 
@@ -26,6 +28,11 @@ namespace Qz.Domain.Domains
         public string GenToken()
         {
             return "---------token---------";
+        }
+
+        public Types.Identifier GetId()
+        {
+            return Id;
         }
     }
 }

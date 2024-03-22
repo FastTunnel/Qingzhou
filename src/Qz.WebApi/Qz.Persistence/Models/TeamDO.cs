@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Qz.Domain.Domains
 {
-    public class Team
+    public class TeamDo
     {
         public long Id { get; set; }
 
-        public required TeamName Name { get; set; }
+        public required string Name { get; set; }
 
         public required string Description { get; set; }
 
