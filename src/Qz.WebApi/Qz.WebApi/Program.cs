@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Repositorys;
 using Qz.AppService.Queries;
+using Qz.Persistence;
 using Qz.Persistence.Repositorys;
 using Qz.WebApi.Services;
 using WebApi.YZGJ.Filters;
+using Qz.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,17 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDapperDBContext<QingZhouDbContext>(options =>
+{
+    var constr = builder.Configuration.GetConnectionString("Core");
+    if (string.IsNullOrEmpty(constr))
+    {
+        throw new Exception("Êý¾Ý¿âÁ¬½Ó×Ö·û´®Î´ÅäÖÃ");
+    }
+
+    options.Configuration = constr;
+});
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
 
 builder.Services.AddTransient<CustomExceptionFilterAttribute>();
@@ -41,7 +54,7 @@ builder.Services.AddDistributedMemoryCache();
 
 // ×¢²áÈÝÆ÷
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<ITeamRepository, TeamRepository>();
+builder.Services.AddSingleton<ITeamRepository, TeamRepository>();
 builder.Services.AddSingleton<ITodoItemRepository, TodoItemRepository>();
 
 var app = builder.Build();

@@ -32,7 +32,7 @@ namespace Qz.Domain.Repository.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T Find(ID id);
+        T? Find(ID id);
 
         /// <summary>
         /// 将一个Aggregate从Repository移除

@@ -1,4 +1,5 @@
-﻿using Qz.Application.Contracts.Assemblers;
+﻿using Dapper;
+using Qz.Application.Contracts.Assemblers;
 using Qz.Application.Contracts.Repositorys;
 using Qz.Domain.Domains;
 using Qz.Domain.Types;
@@ -12,38 +13,35 @@ namespace Qz.Persistence.Repositorys
 {
     public class UserRepository : IUserRepository
     {
+        QingZhouDbContext dbContext;
+
+        public UserRepository(QingZhouDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public void Attach(User aggregate)
         {
-            throw new NotImplementedException();
+
         }
 
         public void Detach(User aggregate)
         {
-            throw new NotImplementedException();
+
         }
 
-        public User Find(Identifier id)
+        public User? Find(Identifier id)
         {
-            return new UserDO
-            {
-                Id = 100,
-                Email = "",
-                Name = "",
-                Password = "password",
-                RegTime = DateTime.Now.AddDays(-1),
-            }.ToUser();
+            var sql = "select * from qz_user where id=1";
+            var user = dbContext.QuerySingleOrDefault<UserDO>(sql, null);
+            return user?.ToUser();
         }
 
-        public User FindByEmail(string email)
+        public User? FindByEmail(string email)
         {
-            return new UserDO
-            {
-                Id = 100,
-                Email = "",
-                Name = "",
-                Password = "password",
-                RegTime = DateTime.Now.AddDays(-1),
-            }.ToUser();
+            var sql = "select * from qz_user where id=1";
+            var user = dbContext.QuerySingleOrDefault<UserDO>(sql, null);
+            return user?.ToUser();
         }
 
         public void Remove(User aggregate)
