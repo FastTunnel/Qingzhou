@@ -37,10 +37,10 @@ namespace Qz.Persistence.Repositorys
             return user?.ToUser();
         }
 
-        public User? FindByEmail(string email)
+        public User? FindByUserName(string userName)
         {
-            var sql = "select * from qz_user where id=1";
-            var user = dbContext.QuerySingleOrDefault<UserDO>(sql, null);
+            var sql = "select * from qz_user where user_name=@userName";
+            var user = dbContext.QuerySingleOrDefault<UserDO>(sql, new { userName });
             return user?.ToUser();
         }
 

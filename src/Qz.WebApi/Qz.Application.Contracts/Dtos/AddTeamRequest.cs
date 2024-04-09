@@ -10,11 +10,9 @@ namespace Qz.Application.Contracts.Dtos
 {
     public class AddTeamRequest : IRequest<AddTeamResponse>
     {
-        [Required]
         public string Name { get; set; }
 
-        [Required]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         public long? UserId { get; set; }
     }

@@ -11,7 +11,7 @@ namespace Qz.Application.Contracts.Dtos
     public class LoginRequest : IRequest<LoginResponse>
     {
         [Required]
-        public string Email { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         public string Password { get; set; }

@@ -11,6 +11,6 @@ namespace Qz.Application.Contracts.Repositorys
 {
     public interface IUserRepository : IRepository<User, Identifier>
     {
-        User? FindByEmail(string email);
+        User? FindByUserName(string email);
     }
 }

@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.IdentityModel.Tokens;
 using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Repositorys;
 using Qz.AppService.Queries;
@@ -8,7 +10,7 @@ using Qz.Persistence;
 using Qz.Persistence.Repositorys;
 using Qz.WebApi.Services;
 using WebApi.YZGJ.Filters;
-using Qz.Persistence;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,50 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
             Message = arg,
             TraceId = context.HttpContext.TraceIdentifier
         });
+    };
+});
+
+builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delegate (JwtBearerOptions options)
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.FromSeconds(Convert.ToInt32(builder.Configuration.GetSection("JWT")["ClockSkew"])),
+        ValidateIssuerSigningKey = true,
+        ValidAudience = builder.Configuration.GetSection("JWT")["ValidAudience"],
+        ValidIssuer = builder.Configuration.GetSection("JWT")["ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(builder.Configuration.GetSection("JWT")["SigningKey"]))
+    };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = async delegate (MessageReceivedContext message)
+        {
+            // 商户后台的token
+            if (message.Request.Cookies.TryGetValue("Authorization", out string token))
+            {
+                message.Token = token.Replace("Bearer ", "");
+            }
+
+            if (message.Request.Headers.TryGetValue("JWT-Token", out var value2))
+            {
+                message.Token = value2[0]?.ToString().Replace("Bearer ", "");
+            }
+        },
+        OnChallenge = async delegate (JwtBearerChallengeContext context)
+        {
+            context.HandleResponse();
+            context.Response.ContentType = "application/json;charset=utf-8";
+            var msg = context.Error ?? "未登录";
+            await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(new QzResponse
+            {
+                Success = false,
+                TraceId = context.HttpContext.TraceIdentifier,
+                Message = msg
+            }));
+        },
     };
 });
 
@@ -56,6 +102,13 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<ITeamRepository, TeamRepository>();
 builder.Services.AddSingleton<ITodoItemRepository, TodoItemRepository>();
+builder.Services.AddCors((options) =>
+{
+    options.AddPolicy("default", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -66,6 +119,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("default");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

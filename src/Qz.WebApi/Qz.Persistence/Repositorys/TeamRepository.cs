@@ -54,7 +54,7 @@ namespace Qz.Persistence.Repositorys
 
         public void Save(Team aggregate)
         {
-            throw new NotImplementedException();
+             
         }
     }
 }

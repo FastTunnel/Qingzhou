@@ -1,18 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Contracts.Base;
 using Qz.Domain.Domains;
 using System.Diagnostics;
+using System.Text.Json;
 using WebApi.YZGJ.Filters;
 
 namespace Qz.WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
-    [Route("[controller]")]
+    [Route("collab/[controller]")]
     public class BaseController : ControllerBase
     {
-        // TODO:
-        public User CurrentUser { get; set; }
+        public CurrentUser CurrentUser
+        {
+            get
+            {
+                var user = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == "User");
+                if (user != null)
+                {
+                    return JsonSerializer.Deserialize<CurrentUser>(user.Value)!;
+                }
+
+                throw new Exception("解析用户认证信息失败");
+            }
+        }
 
         [NonAction]
         public virtual QzResponse Success(object data, string? msg = null)

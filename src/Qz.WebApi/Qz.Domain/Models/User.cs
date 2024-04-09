@@ -8,31 +8,24 @@ using System.Threading.Tasks;
 
 namespace Qz.Domain.Domains
 {
-    public class User : Aggregate<Types.Identifier>
+    public class User : Aggregate<Identifier>
     {
-        public Types.Identifier Id { get; set; }
+        public long Id { get; set; }
 
         public required string Name { get; set; }
 
         public required string Password { get; set; }
 
-        public required string Email { get; set; }
-
-        public required DateTime RegTime { get; set; }
+        public required long RegTime { get; set; }
 
         public bool CheckPass(string password)
         {
             return Password == password;
         }
 
-        public string GenToken()
+        public Identifier GetId()
         {
-            return "---------token---------";
-        }
-
-        public Types.Identifier GetId()
-        {
-            return Id;
+            return null;
         }
     }
 }

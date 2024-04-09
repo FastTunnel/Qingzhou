@@ -14,11 +14,10 @@ namespace Qz.Application.Contracts.Assemblers
         {
             return new User
             {
-                Email = userDo.Email,
-                Name = userDo.Name,
-                RegTime = userDo.RegTime,
-                Password = userDo.Password,
-                Id = new Domain.Types.Identifier(userDo.Id)
+                Name = userDo.user_name,
+                RegTime = userDo.reg_time,
+                Password = userDo.password,
+                Id = userDo.user_id
             };
         }
     }

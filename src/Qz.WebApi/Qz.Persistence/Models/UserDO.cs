@@ -8,14 +8,12 @@ namespace Qz.Domain.Domains
 {
     public class UserDO
     {
-        public long Id { get; set; }
+        public long user_id { get; set; }
 
-        public required string Name { get; set; }
+        public required string user_name { get; set; }
 
-        public required string Password { get; set; }
+        public required string password { get; set; }
 
-        public required string Email { get; set; }
-
-        public required DateTime RegTime { get; set; }
+        public required long reg_time { get; set; }
     }
 }
