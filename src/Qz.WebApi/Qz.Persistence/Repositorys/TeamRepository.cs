@@ -1,7 +1,10 @@
-﻿using Qz.Application.Contracts.Repositorys;
+﻿using Dapper.Contrib.Extensions;
+using Mysqlx.Crud;
+using Qz.Application.Contracts.Repositorys;
 using Qz.Domain.DomainPrimitive;
 using Qz.Domain.Domains;
 using Qz.Domain.Types;
+using Qz.Utility.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +15,12 @@ namespace Qz.Persistence.Repositorys
 {
     public class TeamRepository : ITeamRepository
     {
+        QingZhouDbContext dbContext;
 
+        public TeamRepository(QingZhouDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
         public void Attach(Team aggregate)
         {
             throw new NotImplementedException();
@@ -27,11 +35,11 @@ namespace Qz.Persistence.Repositorys
         {
             return new TeamDo
             {
-                Id = id,
-                Name = "",
-                Description = "",
-                CreatedTime = DateTime.Now,
-                CreateUserId = 1,
+                id = id,
+                name = "",
+                describe = "",
+                created_time = DateTime.Now.ToLong(),
+                created_user = 1,
             };
         }
 
@@ -47,14 +55,14 @@ namespace Qz.Persistence.Repositorys
             };
         }
 
-        public void Remove(Team aggregate)
+        public void Remove(Team team)
         {
-            throw new NotImplementedException();
+            dbContext.Delete(team.Id);
         }
 
-        public void Save(Team aggregate)
+        public void Save(Team team)
         {
-             
+            dbContext.Insert(team);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Qz.Domain.DomainPrimitive;
 using Qz.Domain.Domains;
 using Qz.Domain.Types;
-
+using Qz.Utility.Extensions;
 
 namespace Qz.Persistence.Converters
 {
@@ -11,11 +11,11 @@ namespace Qz.Persistence.Converters
         {
             return new Team
             {
-                Id = new Identifier(userDo.Id),
-                CreatedTime = userDo.CreatedTime,
-                CreateUserId = userDo.CreateUserId,
-                Description = userDo.Description,
-                Name = new TeamName(userDo.Name),
+                Id = new Identifier(userDo.id),
+                CreatedTime = userDo.created_time.ToDateTime(),
+                CreateUserId = userDo.created_user,
+                Description = userDo.describe,
+                Name = new TeamName(userDo.name),
             };
         }
     }

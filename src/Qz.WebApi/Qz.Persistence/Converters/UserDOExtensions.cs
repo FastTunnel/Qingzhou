@@ -14,10 +14,10 @@ namespace Qz.Application.Contracts.Assemblers
         {
             return new User
             {
-                Name = userDo.user_name,
+                Name = userDo.name,
                 RegTime = userDo.reg_time,
                 Password = userDo.password,
-                Id = userDo.user_id
+                Id = userDo.id
             };
         }
     }

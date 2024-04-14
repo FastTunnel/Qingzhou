@@ -8,9 +8,9 @@ namespace Qz.Domain.Domains
 {
     public class UserDO
     {
-        public long user_id { get; set; }
+        public long id { get; set; }
 
-        public required string user_name { get; set; }
+        public required string name { get; set; }
 
         public required string password { get; set; }
 
