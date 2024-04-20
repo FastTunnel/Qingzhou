@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Qz.Application.Contracts.Dtos;
 using Qz.Application.Contracts.Handlers;
-using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
+using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
 
-namespace Qz.AppService.Queries
+namespace Qz.Application.Queries
 {
     public class TodoItemHandler : ITodoItemHandler
     {

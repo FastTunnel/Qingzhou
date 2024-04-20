@@ -1,8 +1,10 @@
 ﻿using Dapper;
-using Qz.Application.Contracts.Assemblers;
-using Qz.Application.Contracts.Repositorys;
-using Qz.Domain.Domains;
+using Qz.Domain.Models;
+using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
+using Qz.Persistence.Converters;
+using Qz.Persistence.Entitys;
+using Qz.Persistence.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +35,14 @@ namespace Qz.Persistence.Repositorys
         public User? Find(Identifier id)
         {
             var sql = "select * from qz_user where id=1";
-            var user = dbContext.QuerySingleOrDefault<UserDO>(sql, null);
+            var user = dbContext.QuerySingleOrDefault<UserEntity>(sql, null);
             return user?.ToUser();
         }
 
         public User? FindByUserName(string userName)
         {
             var sql = "select * from qz_user where name=@userName";
-            var user = dbContext.QuerySingleOrDefault<UserDO>(sql, new { userName });
+            var user = dbContext.QuerySingleOrDefault<UserEntity>(sql, new { userName });
             return user?.ToUser();
         }
 
@@ -49,7 +51,7 @@ namespace Qz.Persistence.Repositorys
             throw new NotImplementedException();
         }
 
-        public void Save(User aggregate)
+        public long Save(User aggregate)
         {
             throw new NotImplementedException();
         }

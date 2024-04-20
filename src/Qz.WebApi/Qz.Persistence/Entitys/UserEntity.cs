@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Domains
+namespace Qz.Persistence.Entitys
 {
-    public class UserDO
+    public class UserEntity
     {
         public long id { get; set; }
 

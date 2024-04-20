@@ -1,7 +1,7 @@
-using Qz.Domain.Repository.Base;
+using Qz.Domain.Repositorys.Base;
 using Qz.Domain.Types;
 
-namespace Qz.Domain.Domains
+namespace Qz.Domain.Models
 {
     public class TodoItem : Aggregate<Identifier>
     {

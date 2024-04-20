@@ -1,5 +1,4 @@
-﻿using Qz.Domain.DomainPrimitive;
-using Qz.Domain.Repository.Base;
+﻿using Qz.Domain.Repositorys.Base;
 using Qz.Domain.Types;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Domains
+namespace Qz.Domain.Models
 {
     public class Team : Aggregate<Identifier>
     {

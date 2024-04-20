@@ -1,15 +1,11 @@
-﻿using Dapper.Contrib.Extensions;
+﻿using Dommel;
 using Mysqlx.Crud;
-using Qz.Application.Contracts.Repositorys;
-using Qz.Domain.DomainPrimitive;
-using Qz.Domain.Domains;
+using Qz.Domain.Models;
+using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
+using Qz.Persistence.Entitys;
+using Qz.Persistence.Extensions;
 using Qz.Utility.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Qz.Persistence.Repositorys
 {
@@ -31,9 +27,9 @@ namespace Qz.Persistence.Repositorys
             throw new NotImplementedException();
         }
 
-        public TeamDo Find(long id)
+        public TeamEntity Find(long id)
         {
-            return new TeamDo
+            return new TeamEntity
             {
                 id = id,
                 name = "",
@@ -60,9 +56,18 @@ namespace Qz.Persistence.Repositorys
             dbContext.Delete(team.Id);
         }
 
-        public void Save(Team team)
+        public long Save(Team team)
         {
-            dbContext.Insert(team);
+            var id = dbContext.Insert(new TeamEntity
+            {
+                name = team.Name.Name,
+                created_time = DateTime.Now.ToLong(),
+                created_user = team.CreateUserId,
+                describe = team.Description,
+            });
+
+            team.Id = new Identifier(Convert.ToInt64(id));
+            return team.Id.Value;
         }
     }
 }

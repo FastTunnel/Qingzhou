@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Repository.Base
+namespace Qz.Domain.Repositorys.Base
 {
     public interface IRepository<T, ID>
         where T : Aggregate<ID>
@@ -46,7 +46,7 @@ namespace Qz.Domain.Repository.Base
         /// 保存后自动重置追踪条件
         /// </summary>
         /// <param name="aggregate"></param>
-        void Save(T aggregate);
+        long Save(T aggregate);
     }
 
     // 聚合根的Marker接口

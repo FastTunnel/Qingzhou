@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Persistence
+namespace Qz.Persistence.Extensions
 {
     public class DapperDBContextOptions : IOptions<DapperDBContextOptions>
     {

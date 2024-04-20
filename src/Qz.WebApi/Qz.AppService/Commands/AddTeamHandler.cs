@@ -1,15 +1,9 @@
-﻿using Qz.Application.Contracts.Assemblers;
+﻿using Qz.Application.Contracts.Converters;
 using Qz.Application.Contracts.Dtos;
 using Qz.Application.Contracts.Handlers;
-using Qz.Application.Contracts.Repositorys;
-using Qz.Domain;
-using Qz.Domain.DomainPrimitive;
-using Qz.Domain.Domains;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Qz.Domain.Models;
+using Qz.Domain.Repositorys;
+using Qz.Domain.Types;
 
 namespace Qz.Application.Commands
 {

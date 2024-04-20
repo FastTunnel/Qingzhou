@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Contracts.Base;
-using Qz.Domain.Domains;
-using System.Diagnostics;
+using Qz.WebApi.Filters;
 using System.Text.Json;
-using WebApi.YZGJ.Filters;
 
 namespace Qz.WebApi.Controllers
 {

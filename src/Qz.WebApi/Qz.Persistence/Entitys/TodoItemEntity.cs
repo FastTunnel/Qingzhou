@@ -1,6 +1,6 @@
-namespace Qz.Domain.Domains
+namespace Qz.Persistence.Entitys
 {
-    public class TodoItemDO
+    public class TodoItemEntity
     {
         public long Id { get; set; }
 

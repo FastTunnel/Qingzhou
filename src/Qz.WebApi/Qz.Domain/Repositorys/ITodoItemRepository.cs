@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Qz.Domain.Domains;
-using Qz.Domain.Repository.Base;
+using Qz.Domain.Models;
+using Qz.Domain.Repositorys.Base;
 using Qz.Domain.Types;
 
-namespace Qz.Application.Contracts.Repositorys
+namespace Qz.Domain.Repositorys
 {
     public interface ITodoItemRepository : IRepository<TodoItem, Identifier>
     {

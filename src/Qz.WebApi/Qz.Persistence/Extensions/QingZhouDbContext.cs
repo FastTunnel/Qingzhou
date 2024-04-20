@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Microsoft.Extensions.Options;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,10 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Persistence
+namespace Qz.Persistence.Extensions
 {
-    public class QingZhouDbConnection : IDbConnection
+    public class QingZhouDbContext : DapperDbContext, IDbConnection
     {
+        public QingZhouDbContext(IOptions<DapperDBContextOptions> optionsAccessor)
+            : base(optionsAccessor)
+        {
+            dbConnection = new MySqlConnection(optionsAccessor.Value.Configuration);
+        }
+
         readonly DbConnection dbConnection;
 
         public string ConnectionString
@@ -24,15 +31,6 @@ namespace Qz.Persistence
         public string Database => dbConnection.Database;
 
         public ConnectionState State => dbConnection.State;
-
-        /// <summary>
-        /// QingZhouDbConnection
-        /// </summary>
-        /// <param name="connString"></param>
-        public QingZhouDbConnection(string connString)
-        {
-            dbConnection = new MySqlConnection(connString);
-        }
 
         public IDbTransaction BeginTransaction()
         {

@@ -1,4 +1,5 @@
-﻿using Qz.Domain.Domains;
+﻿using Qz.Domain.Models;
+using Qz.Persistence.Entitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Qz.Persistence.Converters
 {
     public static class TodoItemDOExtensions
     {
-        public static TodoItem ToTodoItem(this TodoItemDO userDo)
+        public static TodoItem ToTodoItem(this TodoItemEntity userDo)
         {
             return new TodoItem
             {

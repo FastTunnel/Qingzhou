@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Qz.Application.Contracts.Base;
 
-namespace WebApi.YZGJ.Filters
+namespace Qz.WebApi.Filters
 {
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {
@@ -24,7 +24,7 @@ namespace WebApi.YZGJ.Filters
                 Message = context.Exception.Message,
                 TraceId = context.HttpContext.TraceIdentifier
             };
- 
+
             var result = new JsonResult(res) { StatusCode = 200 };
 
             context.Result = result;

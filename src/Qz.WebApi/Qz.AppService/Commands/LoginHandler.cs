@@ -1,11 +1,10 @@
-﻿using BX.Common.Authorization;
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Dtos;
 using Qz.Application.Contracts.Handlers;
-using Qz.Application.Contracts.Repositorys;
 using Qz.Domain;
+using Qz.Domain.Repositorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;

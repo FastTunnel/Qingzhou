@@ -1,12 +1,12 @@
 ﻿using Qz.Application.Contracts.Dtos;
-using Qz.Domain.Domains;
+using Qz.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Application.Contracts.Assemblers
+namespace Qz.Application.Contracts.Converters
 {
     public static class TeamExtensions
     {

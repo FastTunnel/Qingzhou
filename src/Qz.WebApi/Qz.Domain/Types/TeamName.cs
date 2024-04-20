@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.DomainPrimitive
+namespace Qz.Domain.Types
 {
     public class TeamName
     {

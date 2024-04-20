@@ -1,12 +1,9 @@
-﻿using Qz.Application.Contracts.Repositorys;
-using Qz.Domain.Domains;
+﻿using Qz.Domain.Models;
+using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
 using Qz.Persistence.Converters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Qz.Persistence.Entitys;
+
 
 namespace Qz.Persistence.Repositorys
 {
@@ -24,7 +21,7 @@ namespace Qz.Persistence.Repositorys
 
         public TodoItem Find(Identifier id)
         {
-            return new TodoItemDO()
+            return new TodoItemEntity()
             {
                 Id = 10000,
                 Title = "ddd-sample",
@@ -38,7 +35,7 @@ namespace Qz.Persistence.Repositorys
         }
 
 
-        public void Save(TodoItem aggregate)
+        public long Save(TodoItem aggregate)
         {
             throw new NotImplementedException();
         }

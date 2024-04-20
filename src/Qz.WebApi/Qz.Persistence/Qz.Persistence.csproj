@@ -17,7 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Entitys\TeamEntity.cs" />
+    <Compile Include="Entitys\TodoItemEntity.cs" />
+    <Compile Include="Entitys\UserEntity.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Dommel" Version="3.3.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
   </ItemGroup>
@@ -25,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Qz.Application.Contracts\Qz.Application.Contracts.csproj" />
     <ProjectReference Include="..\Qz.Domain\Qz.Domain.csproj" />
+    <ProjectReference Include="..\Qz.Utility\Qz.Utility.csproj" />
   </ItemGroup>
 
 </Project>

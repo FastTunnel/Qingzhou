@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using Qz.Application.Contracts.Base;
-using Qz.Application.Contracts.Repositorys;
-using Qz.AppService.Queries;
-using Qz.Persistence;
+using Qz.Application.Queries;
+using Qz.Domain.Repositorys;
+using Qz.Persistence.Extensions;
 using Qz.Persistence.Repositorys;
+using Qz.WebApi.Filters;
 using Qz.WebApi.Services;
-using WebApi.YZGJ.Filters;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -100,8 +100,8 @@ builder.Services.AddDistributedMemoryCache();
 
 // ×¢²áÈÝÆ÷
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddSingleton<ITeamRepository, TeamRepository>();
-builder.Services.AddSingleton<ITodoItemRepository, TodoItemRepository>();
+builder.Services.AddTransient<ITeamRepository, TeamRepository>();
+builder.Services.AddTransient<ITodoItemRepository, TodoItemRepository>();
 builder.Services.AddCors((options) =>
 {
     options.AddPolicy("default", policy =>

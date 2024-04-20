@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Persistence
+namespace Qz.Persistence.Extensions
 {
     public class DapperDbContext
     {
@@ -13,7 +13,7 @@ namespace Qz.Persistence
 
         public DapperDbContext(IOptions<DapperDBContextOptions> optionsAccessor)
         {
-            this.options = optionsAccessor.Value;
+            options = optionsAccessor.Value;
         }
     }
 }

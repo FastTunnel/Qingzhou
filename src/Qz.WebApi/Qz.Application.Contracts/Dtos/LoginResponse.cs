@@ -1,4 +1,4 @@
-﻿using Qz.Domain.Domains;
+﻿using Qz.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

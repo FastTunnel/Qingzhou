@@ -1,4 +1,4 @@
-﻿using Qz.Domain.Repository.Base;
+﻿using Qz.Domain.Repositorys.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

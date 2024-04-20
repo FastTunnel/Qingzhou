@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 
-namespace BX.Common.Authorization
+namespace Qz.Application
 {
     public class JWTTokenManager
     {
