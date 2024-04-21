@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Qz.Domain.Models;
-using Qz.Domain.Repositorys;
+using Qz.Domain.TodoItems;
 using Qz.Domain.Types;
 using Qz.Persistence.Entitys;
 

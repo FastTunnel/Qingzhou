@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Dommel;
-using Qz.Domain.Models;
-using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
+using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
 

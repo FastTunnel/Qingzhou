@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Models
+namespace Qz.Domain.Teams
 {
     public class Team : Aggregate<Identifier>
     {

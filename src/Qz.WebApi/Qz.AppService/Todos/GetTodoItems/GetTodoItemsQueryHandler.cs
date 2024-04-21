@@ -1,6 +1,6 @@
 ﻿using Qz.Application.Base.Queries;
 using Qz.Application.Contracts.Dtos;
-using Qz.Domain.Repositorys;
+using Qz.Domain.TodoItems;
 using Qz.Domain.Types;
 
 namespace Qz.Application.Todos.GetTodoItems

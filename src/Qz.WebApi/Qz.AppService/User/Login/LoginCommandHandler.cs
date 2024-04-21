@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Qz.Application.Base;
 using Qz.Application.Base.Commands;
 using Qz.Application.Contracts.Dtos;
-using Qz.Domain.Repositorys;
+using Qz.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

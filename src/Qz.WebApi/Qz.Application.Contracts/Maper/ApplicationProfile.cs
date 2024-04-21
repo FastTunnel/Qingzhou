@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Qz.Application.Contracts.Dtos;
-using Qz.Domain.Models;
+using Qz.Domain.Teams;
 using System;
 using System.Collections.Generic;
 using System.Linq;

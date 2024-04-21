@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Dommel;
 using Mysqlx.Crud;
-using Qz.Domain.Models;
-using Qz.Domain.Repositorys;
+using Qz.Domain.Teams;
 using Qz.Domain.Types;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;

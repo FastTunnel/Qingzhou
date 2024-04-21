@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using Qz.Domain.Models;
+using Qz.Domain.Teams;
+using Qz.Domain.TodoItems;
+using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
 using System;
 using System.Collections.Generic;

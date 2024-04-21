@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Qz.Application.Base.Commands;
 using Qz.Application.Contracts.Dtos;
-using Qz.Domain.Models;
-using Qz.Domain.Repositorys;
+using Qz.Domain.Teams;
 using Qz.Domain.Types;
 
 namespace Qz.Application.Teams.AddTeam
