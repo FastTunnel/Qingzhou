@@ -1,7 +1,7 @@
-﻿using Qz.Domain.Models;
+﻿using AutoMapper;
+using Qz.Domain.Models;
 using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
-using Qz.Persistence.Converters;
 using Qz.Persistence.Entitys;
 
 
@@ -9,6 +9,12 @@ namespace Qz.Persistence.Repositorys
 {
     public class TodoItemRepository : ITodoItemRepository
     {
+        IMapper mapper;
+        public TodoItemRepository(IMapper mapper)
+        {
+            this.mapper = mapper;
+        }
+
         public void Attach(TodoItem aggregate)
         {
             throw new NotImplementedException();
@@ -21,12 +27,12 @@ namespace Qz.Persistence.Repositorys
 
         public TodoItem Find(Identifier id)
         {
-            return new TodoItemEntity()
+            return mapper.Map<TodoItem>(new TodoItemEntity()
             {
                 Id = 10000,
                 Title = "ddd-sample",
                 Summary = "Summary"
-            }.ToTodoItem();
+            });
         }
 
         public void Remove(TodoItem aggregate)

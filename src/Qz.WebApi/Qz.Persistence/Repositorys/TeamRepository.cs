@@ -1,4 +1,5 @@
-﻿using Dommel;
+﻿using AutoMapper;
+using Dommel;
 using Mysqlx.Crud;
 using Qz.Domain.Models;
 using Qz.Domain.Repositorys;
@@ -11,10 +12,12 @@ namespace Qz.Persistence.Repositorys
 {
     public class TeamRepository : ITeamRepository
     {
-        QingZhouDbContext dbContext;
+        readonly QingZhouDbContext dbContext;
+        readonly IMapper mapper;
 
-        public TeamRepository(QingZhouDbContext dbContext)
+        public TeamRepository(QingZhouDbContext dbContext, IMapper mapper)
         {
+            this.mapper = mapper;
             this.dbContext = dbContext;
         }
         public void Attach(Team aggregate)
@@ -31,11 +34,11 @@ namespace Qz.Persistence.Repositorys
         {
             return new TeamEntity
             {
-                id = id,
-                name = "",
-                describe = "",
-                created_time = DateTime.Now.ToLong(),
-                created_user = 1,
+                Id = id,
+                Name = "",
+                Describe = "",
+                CreatedTime = DateTime.Now.ToLong(),
+                CreatedUser = 1,
             };
         }
 
@@ -60,10 +63,10 @@ namespace Qz.Persistence.Repositorys
         {
             var id = dbContext.Insert(new TeamEntity
             {
-                name = team.Name.Name,
-                created_time = DateTime.Now.ToLong(),
-                created_user = team.CreateUserId,
-                describe = team.Description,
+                Name = team.Name.Name,
+                CreatedTime = DateTime.Now.ToLong(),
+                CreatedUser = team.CreateUserId,
+                Describe = team.Description,
             });
 
             team.Id = new Identifier(Convert.ToInt64(id));

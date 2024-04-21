@@ -29,5 +29,19 @@ namespace Qz.Application.Commands
             teamRepository.Save(team);
             return Task.FromResult(team.ToAddTeamResponse());
         }
+
+        public Task<AddTeamResponse> Handle(AddTeamRequest request, long userId, CancellationToken cancellationToken)
+        {
+            var team = new Team()
+            {
+                Name = new TeamName(request.Name),
+                CreatedTime = DateTime.UtcNow,
+                CreateUserId = userId,
+                Description = request.Description,
+            };
+
+            teamRepository.Save(team);
+            return Task.FromResult(team.ToAddTeamResponse());
+        }
     }
 }

@@ -10,14 +10,14 @@ namespace Qz.Persistence.Entitys
     public class TeamEntity
     {
         [Key]
-        public long id { get; set; }
+        public long Id { get; set; }
 
-        public required string name { get; set; }
+        public required string Name { get; set; }
 
-        public required string describe { get; set; }
+        public required string Describe { get; set; }
 
-        public required long created_time { get; set; }
+        public required long CreatedTime { get; set; }
 
-        public required long created_user { get; set; }
+        public required long CreatedUser { get; set; }
     }
 }

@@ -1,24 +1,21 @@
-﻿using Dapper;
+﻿using AutoMapper;
+using Dommel;
 using Qz.Domain.Models;
 using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
-using Qz.Persistence.Converters;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Qz.Persistence.Repositorys
 {
     public class UserRepository : IUserRepository
     {
         QingZhouDbContext dbContext;
+        IMapper mapper;
 
-        public UserRepository(QingZhouDbContext dbContext)
+        public UserRepository(QingZhouDbContext dbContext, IMapper mapper)
         {
+            this.mapper = mapper;
             this.dbContext = dbContext;
         }
 
@@ -34,26 +31,25 @@ namespace Qz.Persistence.Repositorys
 
         public User? Find(Identifier id)
         {
-            var sql = "select * from qz_user where id=1";
-            var user = dbContext.QuerySingleOrDefault<UserEntity>(sql, null);
-            return user?.ToUser();
+            var user = dbContext.Select<UserEntity>(x => x.id == id.Value).FirstOrDefault();
+            return mapper.Map<User>(user);
         }
 
         public User? FindByUserName(string userName)
         {
-            var sql = "select * from qz_user where name=@userName";
-            var user = dbContext.QuerySingleOrDefault<UserEntity>(sql, new { userName });
-            return user?.ToUser();
+            var user = dbContext.Select<UserEntity>(x => x.name == userName).FirstOrDefault();
+            return mapper.Map<User>(user);
         }
 
-        public void Remove(User aggregate)
+        public void Remove(User user)
         {
-            throw new NotImplementedException();
+            dbContext.Delete<UserEntity>(mapper.Map<UserEntity>(user));
         }
 
-        public long Save(User aggregate)
+        public long Save(User user)
         {
-            throw new NotImplementedException();
+            dbContext.Insert<UserEntity>(mapper.Map<UserEntity>(user));
+            return user.Id;
         }
     }
 }
