@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
-using Qz.Application.Contracts.Base;
+using Qz.Application.Base;
 
 namespace Qz.WebApi.Filters
 {

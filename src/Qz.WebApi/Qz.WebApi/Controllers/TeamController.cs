@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Qz.Application.Commands;
+using Qz.Application.Base;
 using Qz.Application.Contracts;
-using Qz.Application.Contracts.Base;
 using Qz.Application.Contracts.Dtos;
+using Qz.Application.Teams.AddTeam;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qz.WebApi.Controllers
@@ -20,11 +20,10 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<QzResponse> Put(AddTeamRequest request, [FromServices] AddTeamHandler addTeamHandler)
+        public async Task<QzResponse> Put(AddTeamCommand request)
         {
-            var res = await addTeamHandler.Handle(request, CurrentUser.UserId, Request.HttpContext.RequestAborted);
-            return Success(res);
-            //return Success(await mediator.Send(request));
+            request.UserId = CurrentUser.UserId;
+            return Success(await mediator.Send(request));
         }
 
         [HttpPost]

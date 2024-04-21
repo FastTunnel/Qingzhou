@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Qz.Application.Contracts.Base;
+using Qz.Application.Base;
 using Qz.WebApi.Filters;
 using System.Text.Json;
 

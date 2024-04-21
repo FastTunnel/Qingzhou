@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Qz.Application.Contracts.Base;
+using Qz.Application.Base;
 using Qz.Application.Contracts.Dtos;
 using System.ComponentModel.DataAnnotations;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Application.Contracts.Base
+namespace Qz.Application.Base
 {
     public class QzResponse
     {

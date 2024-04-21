@@ -2,8 +2,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
-using Qz.Application.Contracts.Base;
-using Qz.Application.Contracts.Dtos;
+using Qz.Application.Base;
+using Qz.Application.User.Login;
+using System.Net;
 
 namespace Qz.WebApi.Controllers
 {
@@ -18,7 +19,8 @@ namespace Qz.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<QzResponse> PostAsync([FromServices] IMediator mediator, LoginRequest request)
+        [ProducesResponseType(typeof(QzResponse), (int)HttpStatusCode.OK)]
+        public async Task<QzResponse> PostAsync([FromServices] IMediator mediator, LoginCommand request)
         {
             return Success(await mediator.Send(request));
         }

@@ -1,22 +1,20 @@
-﻿using MediatR;
+﻿using Qz.Application.Base.Queries;
 using Qz.Application.Contracts.Dtos;
-using Qz.Application.Contracts.Handlers;
-using Qz.Domain;
 using Qz.Domain.Repositorys;
 using Qz.Domain.Types;
 
-namespace Qz.Application.Queries
+namespace Qz.Application.Todos.GetTodoItems
 {
-    public class TodoItemHandler : ITodoItemHandler
+    public class GetTodoItemsQueryHandler : IQueryHandler<GetTodoItemsQuery, TodoItemResponse>
     {
         readonly ITodoItemRepository todoItemRepository;
 
-        public TodoItemHandler(ITodoItemRepository todoItemRepository)
+        public GetTodoItemsQueryHandler(ITodoItemRepository todoItemRepository)
         {
             this.todoItemRepository = todoItemRepository;
         }
 
-        public Task<TodoItemResponse> Handle(TodoItemRequest request, CancellationToken cancellationToken)
+        public Task<TodoItemResponse> Handle(GetTodoItemsQuery request, CancellationToken cancellationToken)
         {
             var res = todoItemRepository.Find(new Identifier(request.Id));
 

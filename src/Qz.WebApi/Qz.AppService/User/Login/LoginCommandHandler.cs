@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Qz.Application.Contracts.Base;
+using Qz.Application.Base;
+using Qz.Application.Base.Commands;
 using Qz.Application.Contracts.Dtos;
-using Qz.Application.Contracts.Handlers;
-using Qz.Domain;
 using Qz.Domain.Repositorys;
 using System;
 using System.Collections.Generic;
@@ -13,23 +12,23 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Qz.Application.Commands
+namespace Qz.Application.User.Login
 {
-    public class LoginHandler : ILoginHandler
+    public class LoginCommandHandler : ICommandHandler<LoginCommand, LoginResponse>
     {
         readonly IUserRepository userRepository;
         readonly IDistributedCache distributedCache;
         IConfiguration config;
         const string Key = "User";
 
-        public LoginHandler(IUserRepository userRepository, IDistributedCache distributedCache, IConfiguration config)
+        public LoginCommandHandler(IUserRepository userRepository, IDistributedCache distributedCache, IConfiguration config)
         {
             this.userRepository = userRepository;
             this.distributedCache = distributedCache;
             this.config = config;
         }
 
-        public Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
+        public Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = userRepository.FindByUserName(request.UserName);
             if (user == null)
@@ -44,7 +43,7 @@ namespace Qz.Application.Commands
             }
 
             var claims = new[] {
-                    new Claim(Key,  JsonSerializer.Serialize( new CurrentUser{
+                    new Claim(Key,  JsonSerializer.Serialize(new CurrentUser{
                         UserId = user.Id,
                         UserName = user.Name,
                     })),

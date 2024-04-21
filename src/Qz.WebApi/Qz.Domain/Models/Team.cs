@@ -20,6 +20,17 @@ namespace Qz.Domain.Models
 
         public required long CreateUserId { get; set; }
 
+        public static Team CreateTeam(string name, string description, long userId)
+        {
+            return new Team
+            {
+                Name = new TeamName(name),
+                Description = description,
+                CreateUserId = userId,
+                CreatedTime = DateTime.Now,
+            };
+        }
+
         public Identifier GetId()
         {
             return Id;

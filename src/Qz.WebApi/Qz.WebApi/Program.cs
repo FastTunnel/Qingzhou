@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
-using Qz.Application.Commands;
-using Qz.Application.Contracts.Base;
-using Qz.Application.Queries;
+using Qz.Application.Base;
+using Qz.Application.Contracts.Maper;
+using Qz.Application.Teams.AddTeam;
+using Qz.Application.Todos.GetTodoItems;
 using Qz.Domain.Repositorys;
 using Qz.Persistence.Extensions;
 using Qz.Persistence.Maper;
@@ -31,8 +32,9 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
     };
 });
 
-builder.Services.AddAutoMapper(typeof(EntityProfile));
-builder.Services.AddTransient<AddTeamHandler>();
+builder.Services.AddAutoMapper(typeof(EntityProfile), typeof(ApplicationProfile));
+
+builder.Services.AddTransient<AddTeamCommandHandler>();
 
 builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delegate (JwtBearerOptions options)
 {
@@ -93,7 +95,7 @@ builder.Services.AddDapperDBContext<QingZhouDbContext>(options =>
     options.Configuration = constr;
 });
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoItemHandler>());
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<GetTodoItemsQueryHandler>());
 
 builder.Services.AddTransient<CustomExceptionFilterAttribute>();
 
