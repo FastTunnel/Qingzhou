@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using Qz.Application.Base;
-using Qz.Application.Contracts.Maper;
-using Qz.Application.Teams.AddTeam;
+using Qz.Application.Orgs.AddOrg;
 using Qz.Application.Todos.GetTodoItems;
-using Qz.Domain.Teams;
+using Qz.Domain.Orgs;
 using Qz.Domain.TodoItems;
 using Qz.Domain.Users;
 using Qz.Persistence.Extensions;
@@ -34,7 +32,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
     };
 });
 
-builder.Services.AddAutoMapper(typeof(EntityProfile), typeof(ApplicationProfile));
+builder.Services.AddAutoMapper(typeof(EntityProfile));
 
 builder.Services.AddTransient<AddTeamCommandHandler>();
 
@@ -109,7 +107,7 @@ builder.Services.AddDistributedMemoryCache();
 
 // ×¢²áÈÝÆ÷
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<ITeamRepository, TeamRepository>();
+builder.Services.AddTransient<ITeamRepository, OrgRepository>();
 builder.Services.AddTransient<ITodoItemRepository, TodoItemRepository>();
 builder.Services.AddCors((options) =>
 {

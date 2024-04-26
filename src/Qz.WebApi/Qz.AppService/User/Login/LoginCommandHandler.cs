@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Qz.Application.Base;
 using Qz.Application.Base.Commands;
-using Qz.Application.Contracts.Dtos;
 using Qz.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -46,13 +45,15 @@ namespace Qz.Application.User.Login
                     new Claim(Key,  JsonSerializer.Serialize(new CurrentUser{
                         UserId = user.Id,
                         UserName = user.Name,
+                        //Teams = teams
                     })),
-             };
+            };
 
             var token = JWTTokenManager.GenerateToken(claims, config.GetSection("JWT")["SigningKey"]);
+
             return Task.FromResult(new LoginResponse
             {
-                Token = token
+                Token = token,
             });
         }
     }

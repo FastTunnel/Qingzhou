@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Application.Contracts.Dtos
+namespace Qz.Application.Orgs.AddOrg
 {
-    public class TodoItemResponse
+    public class AddTeamResponse
     {
-        public TodoDto TodoInfo { get; set; }
+        public long TeamId { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Qz.Domain.Users
 {
-    public class User : Aggregate<Identifier>
+    public class User : Aggregate<long>
     {
         public long Id { get; set; }
 
@@ -21,11 +21,6 @@ namespace Qz.Domain.Users
         public bool CheckPass(string password)
         {
             return Password == password;
-        }
-
-        public Identifier GetId()
-        {
-            return null;
         }
     }
 }

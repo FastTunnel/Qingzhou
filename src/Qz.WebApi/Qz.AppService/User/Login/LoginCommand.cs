@@ -1,5 +1,4 @@
 ﻿using Qz.Application.Base.Commands;
-using Qz.Application.Contracts.Dtos;
 using System.ComponentModel.DataAnnotations;
 
 

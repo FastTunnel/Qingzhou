@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using Qz.Domain.Teams;
 using Qz.Domain.TodoItems;
 using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Organization = Qz.Domain.Orgs.Org;
 
 namespace Qz.Persistence.Maper
 {
@@ -15,7 +10,7 @@ namespace Qz.Persistence.Maper
     {
         public EntityProfile()
         {
-            CreateMap<Team, TeamEntity>().ReverseMap();
+            CreateMap<Organization, OrgEntity>().ReverseMap();
             CreateMap<TodoItem, TodoItemEntity>().ReverseMap();
             CreateMap<User, UserEntity>().ReverseMap();
         }

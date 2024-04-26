@@ -24,7 +24,7 @@ namespace Qz.Persistence.Repositorys
             throw new NotImplementedException();
         }
 
-        public TodoItem Find(Identifier id)
+        public TodoItem Find(long id)
         {
             return mapper.Map<TodoItem>(new TodoItemEntity()
             {

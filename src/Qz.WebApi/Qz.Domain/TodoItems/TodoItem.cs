@@ -3,17 +3,12 @@ using Qz.Domain.Types;
 
 namespace Qz.Domain.TodoItems
 {
-    public class TodoItem : Aggregate<Identifier>
+    public class TodoItem : Aggregate<long>
     {
-        public Identifier Id { get; set; }
+        public long Id { get; set; }
 
         public required string Title { get; set; }
 
         public required string Summary { get; set; }
-
-        public Identifier GetId()
-        {
-            return Id;
-        }
     }
 }

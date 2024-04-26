@@ -1,5 +1,4 @@
 ﻿using Qz.Application.Base.Queries;
-using Qz.Application.Contracts.Dtos;
 using Qz.Domain.TodoItems;
 using Qz.Domain.Types;
 
@@ -16,7 +15,7 @@ namespace Qz.Application.Todos.GetTodoItems
 
         public Task<TodoItemResponse> Handle(GetTodoItemsQuery request, CancellationToken cancellationToken)
         {
-            var res = todoItemRepository.Find(new Identifier(request.Id));
+            var res = todoItemRepository.Find(request.Id);
 
             return Task.FromResult(new TodoItemResponse
             {

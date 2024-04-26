@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Qz.Application.Base.Commands;
-using Qz.Application.Contracts.Dtos;
-using Qz.Domain.Teams;
+using Qz.Domain.Orgs;
 using Qz.Domain.Types;
 
-namespace Qz.Application.Teams.AddTeam
+namespace Qz.Application.Orgs.AddOrg
 {
     public class AddTeamCommandHandler : ICommandHandler<AddTeamCommand, AddTeamResponse>
     {
@@ -19,10 +18,10 @@ namespace Qz.Application.Teams.AddTeam
 
         public Task<AddTeamResponse> Handle(AddTeamCommand request, CancellationToken cancellationToken)
         {
-            var team = Team.CreateTeam(request.Name, request.Description, request.UserId.Value);
+            var team = Org.CreateTeam(request.Name, request.Description, request.UserId.Value);
 
             var id = teamRepository.Save(team);
-            team.Id = new Identifier(id);
+            team.Id = id;
 
             return Task.FromResult(new AddTeamResponse
             {

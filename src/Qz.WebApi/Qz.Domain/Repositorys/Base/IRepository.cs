@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Qz.Domain.Repositorys.Base
 {
-    public interface IRepository<T, ID>
-        where T : Aggregate<ID>
-        where ID : IIdentifier
+    public interface IRepository<T>
+    //where ID : IIdentifier
     {
         /// <summary>
         /// 将一个Aggregate附属到一个Repository，让它变为可追踪。
@@ -32,7 +31,7 @@ namespace Qz.Domain.Repositorys.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T? Find(ID id);
+        T? Find(long id);
 
         /// <summary>
         /// 将一个Aggregate从Repository移除
@@ -51,27 +50,27 @@ namespace Qz.Domain.Repositorys.Base
 
     // 聚合根的Marker接口
     public interface Aggregate<ID> : Entity<ID>
-       where ID : IIdentifier
+    //where ID : IIdentifier
     {
 
     }
 
     // 实体类的Marker接口
     public interface Entity<ID> : Identifiable<ID>
-        where ID : IIdentifier
+    //where ID : IIdentifier
     {
 
     }
 
     public interface Identifiable<ID>
-        where ID : IIdentifier
+    //where ID : IIdentifier
     {
-        ID GetId();
+        //ID GetId();
     }
 
     // ID类型DP的Marker接口
-    public interface IIdentifier
-    {
+    //public interface IIdentifier
+    //{
 
-    }
+    //}
 }

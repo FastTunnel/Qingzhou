@@ -8,7 +8,7 @@ using Qz.Domain.Types;
 
 namespace Qz.Domain.TodoItems
 {
-    public interface ITodoItemRepository : IRepository<TodoItem, Identifier>
+    public interface ITodoItemRepository : IRepository<TodoItem>
     {
     }
 }

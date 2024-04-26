@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Dapper;
 using Dommel;
+using Qz.Domain.Orgs;
 using Qz.Domain.Types;
 using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
+using Organization = Qz.Domain.Orgs.Org;
 
 namespace Qz.Persistence.Repositorys
 {
@@ -28,9 +31,9 @@ namespace Qz.Persistence.Repositorys
 
         }
 
-        public User? Find(Identifier id)
+        public User? Find(long id)
         {
-            var user = dbContext.Select<UserEntity>(x => x.id == id.Value).FirstOrDefault();
+            var user = dbContext.Select<UserEntity>(x => x.id == id).FirstOrDefault();
             return mapper.Map<User>(user);
         }
 
@@ -39,6 +42,7 @@ namespace Qz.Persistence.Repositorys
             var user = dbContext.Select<UserEntity>(x => x.name == userName).FirstOrDefault();
             return mapper.Map<User>(user);
         }
+
 
         public void Remove(User user)
         {

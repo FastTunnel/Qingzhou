@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qz.Domain.Orgs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,7 @@ namespace Qz.Application.Base
         public required long UserId { get; set; }
 
         public required string UserName { get; set; }
+
+        //public required IEnumerable<Org> Teams { get; set; }
     }
 }
