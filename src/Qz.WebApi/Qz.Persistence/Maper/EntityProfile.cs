@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Qz.Domain.Issues;
 using Qz.Domain.TodoItems;
 using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
@@ -12,7 +13,8 @@ namespace Qz.Persistence.Maper
         {
             CreateMap<Organization, OrgEntity>().ReverseMap();
             CreateMap<TodoItem, TodoItemEntity>().ReverseMap();
-            CreateMap<User, UserEntity>().ReverseMap();
+            CreateMap<User, UserEntity>().ReverseMap();   
+            CreateMap<Issue, IssueEntity>().ReverseMap();
         }
     }
 }

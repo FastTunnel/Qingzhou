@@ -1,8 +1,11 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Base;
 using Qz.Application.Todos.GetTodoItems;
+using Qz.Application.User.Login;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace Qz.WebApi.Controllers
 {
@@ -15,22 +18,12 @@ namespace Qz.WebApi.Controllers
             _logger = logger;
         }
 
-        [HttpPut]
-        public QzResponse Put(TodoDto item)
-        {
-            return Success($"insert");
-        }
-
+        [AllowAnonymous]
         [HttpPost]
-        public QzResponse Post(TodoDto item)
+        //[ProducesResponseType(typeof(LoginCommand), (int)HttpStatusCode.OK)]
+        public async Task<QzResponse<LoginResponse>> Login([FromServices] IMediator mediator, LoginCommand request)
         {
-            return Success($"updated");
-        }
-
-        [HttpDelete]
-        public QzResponse Delete([Range(1, double.MaxValue)] long Id)
-        {
-            return Success($"deleted");
+            return Success<LoginResponse>(await mediator.Send(request));
         }
     }
 }

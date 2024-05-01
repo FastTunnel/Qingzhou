@@ -9,7 +9,7 @@ using Organization = Qz.Domain.Orgs.Org;
 
 namespace Qz.Domain.Orgs
 {
-    public interface ITeamRepository : IRepository<Org>
+    public interface IOrgRepository : IRepository<Org>
     {
         IEnumerable<Organization> ListOrgForCurrentUser(long userId);
     }

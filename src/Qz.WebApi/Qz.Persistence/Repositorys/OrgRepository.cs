@@ -11,7 +11,7 @@ using Organization = Qz.Domain.Orgs.Org;
 
 namespace Qz.Persistence.Repositorys
 {
-    public class OrgRepository : ITeamRepository
+    public class OrgRepository : IOrgRepository
     {
         readonly QingZhouDbContext dbContext;
         readonly IMapper mapper;
@@ -21,6 +21,7 @@ namespace Qz.Persistence.Repositorys
             this.mapper = mapper;
             this.dbContext = dbContext;
         }
+
         public void Attach(Organization aggregate)
         {
             throw new NotImplementedException();
@@ -61,8 +62,8 @@ namespace Qz.Persistence.Repositorys
             var id = dbContext.Insert(new OrgEntity
             {
                 Name = team.Name,
-                CreatedTime = DateTime.Now.ToLong(),
-                CreatedUser = team.CreateUserId,
+                CreatedAt = DateTime.Now.ToLong(),
+                CreatedBy = team.CreateUserId,
                 Describe = team.Describe,
             });
 

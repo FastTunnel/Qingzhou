@@ -7,10 +7,10 @@ namespace Qz.Application.Orgs.AddOrg
 {
     public class AddTeamCommandHandler : ICommandHandler<AddTeamCommand, AddTeamResponse>
     {
-        readonly ITeamRepository teamRepository;
+        readonly IOrgRepository teamRepository;
         IMapper mapper;
 
-        public AddTeamCommandHandler(ITeamRepository teamRepository, IMapper mapper)
+        public AddTeamCommandHandler(IOrgRepository teamRepository, IMapper mapper)
         {
             this.mapper = mapper;
             this.teamRepository = teamRepository;

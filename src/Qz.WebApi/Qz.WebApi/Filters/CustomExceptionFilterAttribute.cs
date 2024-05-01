@@ -17,7 +17,7 @@ namespace Qz.WebApi.Filters
         public override void OnException(ExceptionContext context)
         {
             _logger.LogError(context.Exception, "【全局异常捕获】");
-            var res = new QzResponse()
+            var res = new QzResponse<object>()
             {
                 Success = false,
                 Data = null,

@@ -14,6 +14,6 @@ namespace Qz.Persistence.Entitys
 
         public required string password { get; set; }
 
-        public required long reg_time { get; set; }
+        public required long RegAt { get; set; }
     }
 }

@@ -11,9 +11,9 @@ namespace Qz.Application.Orgs.ListOrg
 {
     public class ListOrgCommandHandler : ICommandHandler<ListOrgCommand, ListOrgResponse>
     {
-        ITeamRepository orgRepository;
+        IOrgRepository orgRepository;
 
-        public ListOrgCommandHandler(ITeamRepository orgRepository)
+        public ListOrgCommandHandler(IOrgRepository orgRepository)
         {
             this.orgRepository = orgRepository;
         }

@@ -16,8 +16,8 @@ namespace Qz.Persistence.Entitys
 
         public required string Describe { get; set; }
 
-        public required long CreatedTime { get; set; }
+        public required long CreatedAt { get; set; }
 
-        public required long CreatedUser { get; set; }
+        public required long CreatedBy { get; set; }
     }
 }

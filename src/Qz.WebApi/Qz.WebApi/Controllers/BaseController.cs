@@ -8,8 +8,8 @@ namespace Qz.WebApi.Controllers
 {
     [Authorize]
     [ApiController]
+    [Route("api/[controller]/[action]")]
     [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
-    [Route("collab/[controller]")]
     public class BaseController : ControllerBase
     {
         public CurrentUser CurrentUser
@@ -27,9 +27,9 @@ namespace Qz.WebApi.Controllers
         }
 
         [NonAction]
-        public virtual QzResponse Success(object data, string? msg = null)
+        public virtual QzResponse<T> Success<T>(T data, string? msg = null)
         {
-            return new QzResponse
+            return new QzResponse<T>
             {
                 Success = true,
                 Data = data,
@@ -39,9 +39,9 @@ namespace Qz.WebApi.Controllers
         }
 
         [NonAction]
-        public virtual QzResponse Fail(object data, string msg)
+        public virtual QzResponse<T> Fail<T>(T data, string msg)
         {
-            return new QzResponse
+            return new QzResponse<T>
             {
                 Success = false,
                 Data = data,

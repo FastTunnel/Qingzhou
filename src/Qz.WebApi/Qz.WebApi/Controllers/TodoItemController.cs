@@ -16,25 +16,25 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<QzResponse> Get([FromServices] IMediator mediator, [Range(1, double.MaxValue)] long Id)
+        public async Task<QzResponse<TodoItemResponse>> Get([FromServices] IMediator mediator, [Range(1, double.MaxValue)] long Id)
         {
             return Success(await mediator.Send(new GetTodoItemsQuery { Id = Id }));
         }
 
         [HttpPut]
-        public QzResponse Put(TodoDto item)
+        public QzResponse<string> Put(TodoDto item)
         {
             return Success($"insert");
         }
 
         [HttpPost]
-        public QzResponse Post(TodoDto item)
+        public QzResponse<string> Post(TodoDto item)
         {
             return Success($"updated");
         }
 
         [HttpDelete]
-        public QzResponse Delete([Range(1, double.MaxValue)] long Id)
+        public QzResponse<string> Delete([Range(1, double.MaxValue)] long Id)
         {
             return Success($"deleted");
         }

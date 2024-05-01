@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Entitys\IssueEntity.cs" />
     <Compile Include="Entitys\OrgEntity.cs" />
     <Compile Include="Entitys\OrgMemberEntity.cs" />
     <Compile Include="Entitys\TodoItemEntity.cs" />
