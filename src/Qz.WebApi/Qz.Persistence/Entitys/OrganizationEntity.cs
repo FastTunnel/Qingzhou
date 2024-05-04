@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Qz.Persistence.Entitys
 {
-    public class OrgEntity
+    public class OrganizationEntity
     {
         [Key]
         public long Id { get; set; }

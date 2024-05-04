@@ -2,12 +2,11 @@
 using Dapper;
 using Dommel;
 using Mysqlx.Crud;
-using Qz.Domain.Orgs;
-using Qz.Domain.Types;
+using Qz.Domain.Organization;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
 using Qz.Utility.Extensions;
-using Organization = Qz.Domain.Orgs.Organization;
+using Organization = Qz.Domain.Organization.Organization;
 
 namespace Qz.Persistence.Repositorys
 {
@@ -27,42 +26,35 @@ namespace Qz.Persistence.Repositorys
             throw new NotImplementedException();
         }
 
-        public void Detach(Domain.Orgs.Organization aggregate)
+        public void Detach(Organization aggregate)
         {
             throw new NotImplementedException();
         }
 
-        public Domain.Orgs.Organization Find(long id)
+        public Organization Find(long id)
         {
-            return new Domain.Orgs.Organization
-            {
-                Id = id,
-                Name = "测试",
-                Describe = "",
-                CreatedTime = DateTime.Now,
-                CreateUserId = 1,
-            };
+            return Organization.CreateTeam("测试", "desc", 1);
         }
 
         public IEnumerable<Organization> ListOrgForCurrentUser(long userId)
         {
             var sql = "select B.* from qz_org_member A left JOIN qz_org B ON A.org_id=B.id where user_id=@userId ";
-            var list = dbContext.Query<OrgEntity>(sql, new { userId });
+            var list = dbContext.Query<OrganizationEntity>(sql, new { userId });
 
             return list.Select(x => mapper.Map<Organization>(x));
         }
 
-        public void Remove(Domain.Orgs.Organization team)
+        public void Remove(Organization team)
         {
             dbContext.Delete(team.Id);
         }
 
-        public long Save(Domain.Orgs.Organization team)
+        public long Save(Organization team)
         {
-            var id = dbContext.Insert(new OrgEntity
+            var id = dbContext.Insert(new OrganizationEntity
             {
                 Name = team.Name,
-                CreatedAt = DateTime.Now.ToLong(),
+                CreatedAt = DateTime.Now.ToTimestamp(),
                 CreatedBy = team.CreateUserId,
                 Describe = team.Describe,
             });

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Application.Orgs.AddOrg
+namespace Qz.Application.Orgs.CreateOrganization
 {
-    public class CreateOrganizationRequest : ICommand<ListMembersResponse>
+    public class CreateOrganizationRequest : ICommand<CreateOrganizationResponse>
     {
         public string Name { get; set; }
 

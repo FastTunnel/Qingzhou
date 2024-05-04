@@ -16,7 +16,7 @@ namespace Qz.WebApi.Services
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                logger.LogInformation($"now: {DateTime.Now.ToLong()}");
+                logger.LogInformation($"now: {DateTime.Now.ToTimestamp()}");
                 await Task.Delay(1000);
             }
         }

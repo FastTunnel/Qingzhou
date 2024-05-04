@@ -1,13 +1,13 @@
-﻿using Qz.Application.Base.Commands;
+﻿using Qz.Application.Base.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Application.Members.ListMembers
+namespace Qz.Application.Projects.ListProject
 {
-    public class ListMembersRequest : ICommand<ListMembersResponse>
+    public class ListProjectRequest : IQuery<ListProjectResponse>
     {
         public long OrganizationId { get; set; }
     }

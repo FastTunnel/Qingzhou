@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Repositorys.Base
+namespace Qz.Domain.Base.Repositorys
 {
-    public interface IRepository<T>
+    public interface IRepository<Domain>
     //where ID : IIdentifier
     {
         /// <summary>
@@ -16,14 +16,14 @@ namespace Qz.Domain.Repositorys.Base
         /// Change-Tracking在下文会讲，非必须
         /// </summary>
         /// <param name="aggregate"></param>
-        void Attach(T aggregate);
+        void Attach(Domain aggregate);
 
         /// <summary>
         /// 解除一个Aggregate的追踪
         /// Change-Tracking在下文会讲，非必须
         /// </summary>
         /// <param name="aggregate"></param>
-        void Detach(T aggregate);
+        void Detach(Domain aggregate);
 
         /// <summary>
         /// 通过ID寻找Aggregate。
@@ -31,21 +31,21 @@ namespace Qz.Domain.Repositorys.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T? Find(long id);
+        Domain? Find(long id);
 
         /// <summary>
         /// 将一个Aggregate从Repository移除
         /// 操作后的aggregate对象自动取消追踪
         /// </summary>
         /// <param name="aggregate"></param>
-        void Remove(T aggregate);
+        void Remove(Domain aggregate);
 
         /// <summary>
         /// 保存一个Aggregate
         /// 保存后自动重置追踪条件
         /// </summary>
         /// <param name="aggregate"></param>
-        long Save(T aggregate);
+        long Save(Domain aggregate);
     }
 
     // 聚合根的Marker接口

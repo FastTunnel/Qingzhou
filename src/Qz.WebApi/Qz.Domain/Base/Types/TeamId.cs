@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Types
+namespace Qz.Domain.Base.Types
 {
-    public class UserName
+    internal class TeamId
     {
-        public UserName(string name)
-        {
-
-        }
     }
 }

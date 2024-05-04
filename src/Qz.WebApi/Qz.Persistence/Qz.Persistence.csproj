@@ -17,9 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Entitys\IssueEntity.cs" />
-    <Compile Include="Entitys\OrgEntity.cs" />
-    <Compile Include="Entitys\OrgMemberEntity.cs" />
+    <Compile Include="Entitys\WorkitemEntity.cs" />
+    <Compile Include="Entitys\OrganizationEntity.cs" />
+    <Compile Include="Entitys\OrganizationMemberEntity.cs" />
+    <Compile Include="Entitys\ProjectEntity.cs" />
     <Compile Include="Entitys\TodoItemEntity.cs" />
     <Compile Include="Entitys\UserEntity.cs" />
   </ItemGroup>

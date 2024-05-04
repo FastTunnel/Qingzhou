@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Issues
+namespace Qz.Persistence.Entitys
 {
-    public class Issue
+    public class WorkitemEntity
     {
         public long Id { get; set; }
 

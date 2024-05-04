@@ -1,6 +1,6 @@
 ﻿using Qz.Application.Base;
 using Qz.Application.Base.Commands;
-using Qz.Domain.Orgs;
+using Qz.Domain.Organization;
 using System;
 using System.Collections.Generic;
 using System.Linq;

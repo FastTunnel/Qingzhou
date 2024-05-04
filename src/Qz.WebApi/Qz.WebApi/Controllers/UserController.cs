@@ -20,7 +20,6 @@ namespace Qz.WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        //[ProducesResponseType(typeof(LoginCommand), (int)HttpStatusCode.OK)]
         public async Task<QzResponse<LoginResponse>> Login([FromServices] IMediator mediator, LoginCommand request)
         {
             return Success<LoginResponse>(await mediator.Send(request));

@@ -1,15 +1,16 @@
-﻿using Qz.Domain.Repositorys.Base;
-using Qz.Domain.Types;
+﻿using Qz.Domain.Base.Repositorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Orgs
+namespace Qz.Domain.Organization
 {
     public class Organization : Aggregate<long>
     {
+        private Organization() { }
+
         public long Id { get; set; }
 
         public required string Name { get; set; }

@@ -1,5 +1,4 @@
-using Qz.Domain.Repositorys.Base;
-using Qz.Domain.Types;
+using Qz.Domain.Base.Repositorys;
 
 namespace Qz.Domain.TodoItems
 {

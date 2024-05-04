@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qz.Domain.Workitems;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Qz.Application.Issue
 {
     public class MyIssueResponse
     {
-        public IEnumerable<Domain.Issues.Issue> Issues { get; internal set; }
+        public IEnumerable<Workitem> Issues { get; internal set; }
     }
 }

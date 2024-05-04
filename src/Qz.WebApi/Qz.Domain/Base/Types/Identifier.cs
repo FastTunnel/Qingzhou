@@ -1,11 +1,10 @@
-﻿using Qz.Domain.Repositorys.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Types
+namespace Qz.Domain.Base.Types
 {
     //public class Identifier : IIdentifier
     //{

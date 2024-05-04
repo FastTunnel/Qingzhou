@@ -1,6 +1,6 @@
-﻿using Qz.Domain.Repositorys.Base;
+﻿using Qz.Domain.Base.Repositorys;
 
-namespace Qz.Domain.Orgs
+namespace Qz.Domain.Organization
 {
     public interface IOrganizationRepository : IRepository<Organization>
     {

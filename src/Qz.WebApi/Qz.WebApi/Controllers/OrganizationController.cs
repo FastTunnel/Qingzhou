@@ -1,10 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Base;
-using Qz.Application.Orgs.AddOrg;
+using Qz.Application.Orgs.CreateOrganization;
 using Qz.Application.Orgs.ListOrg;
-using Qz.Application.Todos.GetTodoItems;
-using Qz.Domain.Orgs;
 using System.ComponentModel.DataAnnotations;
 
 namespace Qz.WebApi.Controllers
@@ -22,10 +20,11 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<QzResponse<ListMembersResponse>> createOrganization(CreateOrganizationRequest request)
+        public async Task<QzResponse<CreateOrganizationResponse>> CreateOrganization(CreateOrganizationRequest request)
         {
             request.UserId = CurrentUser.UserId;
-            return Success(await mediator.Send(request));
+            var res = await mediator.Send(request);
+            return Success(res);
         }
 
         [HttpDelete]
@@ -35,7 +34,7 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<QzResponse<ListOrgResponse>> listOrganizations()
+        public async Task<QzResponse<ListOrgResponse>> ListOrganizations()
         {
             var res = await mediator.Send(new ListOrgCommand { UserId = CurrentUser.UserId });
             return Success(res);

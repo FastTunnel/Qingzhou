@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Users
+namespace Qz.Domain.Projects
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IProjectRepository : IRepository<Project>
     {
-        User? FindByUserName(string email);
     }
 }

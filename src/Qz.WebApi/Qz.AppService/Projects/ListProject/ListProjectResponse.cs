@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Types
+namespace Qz.Application.Projects.ListProject
 {
-    internal class TeamId
+    public class ListProjectResponse
     {
     }
 }

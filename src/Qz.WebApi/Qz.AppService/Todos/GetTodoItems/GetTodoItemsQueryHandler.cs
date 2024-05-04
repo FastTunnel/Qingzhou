@@ -1,6 +1,5 @@
 ﻿using Qz.Application.Base.Queries;
 using Qz.Domain.TodoItems;
-using Qz.Domain.Types;
 
 namespace Qz.Application.Todos.GetTodoItems
 {

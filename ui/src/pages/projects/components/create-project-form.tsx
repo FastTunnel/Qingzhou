@@ -1,5 +1,3 @@
-import { CreateProject } from "@/apis";
-import { useProjectTemplates } from "@/apis/modules/project";
 import { Icons } from "@/components/icons";
 import { SubpageBack } from "@/components/pages/subpage-back";
 import { Button } from "@/components/ui/button"

@@ -6,12 +6,13 @@ using NSwag;
 using NSwag.Generation.Processors;
 using Qz.Application;
 using Qz.Application.Base;
-using Qz.Application.Orgs.AddOrg;
+using Qz.Application.Orgs.CreateOrganization;
 using Qz.Application.Todos.GetTodoItems;
-using Qz.Domain.Issues;
-using Qz.Domain.Orgs;
+using Qz.Domain.Organization;
+using Qz.Domain.Projects;
 using Qz.Domain.TodoItems;
 using Qz.Domain.Users;
+using Qz.Domain.Workitems;
 using Qz.Persistence.Extensions;
 using Qz.Persistence.Issues;
 using Qz.Persistence.Maper;
@@ -22,6 +23,7 @@ using Qz.WebApi.Services;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -150,7 +152,8 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddTransient<ITodoItemRepository, TodoItemRepository>();
-builder.Services.AddTransient<IIssueRepository, IssueRepository>();
+builder.Services.AddTransient<IWorkitemRepository, IssueRepository>();
+builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 
 builder.Services.AddCors((options) =>
 {
@@ -169,7 +172,10 @@ if (app.Environment.IsDevelopment())
 {
     // Add OpenAPI 3.0 document serving middleware
     // Available at: http://localhost:<port>/swagger/v1/swagger.json
-    app.UseOpenApi();
+    app.UseOpenApi(c =>
+    {
+
+    });
 
     // Add web UIs to interact with the document
     // Available at: http://localhost:<port>/swagger

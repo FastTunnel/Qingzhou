@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Qz.Domain.Base.Repositorys;
 
-namespace Qz.Domain.TodoItems
+namespace Qz.Domain.Base.Types
 {
-    public interface ITodoItemRepository : IRepository<TodoItem>
+    public class UserName
     {
+        public UserName(string name)
+        {
+
+        }
     }
 }

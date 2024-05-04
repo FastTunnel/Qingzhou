@@ -9,10 +9,10 @@ namespace Qz.WebApi.Controllers
     [Route("api/Organization/{organizationId}/[controller]")]
     public class WorkitemsController : BaseController
     {
-        private readonly ILogger<OrganizationController> _logger;
+        private readonly ILogger<WorkitemsController> _logger;
         private readonly IMediator mediator;
 
-        public WorkitemsController(ILogger<OrganizationController> logger, IMediator mediator)
+        public WorkitemsController(ILogger<WorkitemsController> logger, IMediator mediator)
         {
             _logger = logger;
             this.mediator = mediator;

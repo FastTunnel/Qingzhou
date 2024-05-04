@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Qz.Application.Base.Commands;
-using Qz.Domain.Orgs;
-using Qz.Domain.Types;
+using Qz.Application.Members.ListMembers;
+using Qz.Domain.Organization;
 
-namespace Qz.Application.Orgs.AddOrg
+namespace Qz.Application.Orgs.CreateOrganization
 {
-    public class CreateOrganizationHandler : ICommandHandler<CreateOrganizationRequest, ListMembersResponse>
+    public class CreateOrganizationHandler : ICommandHandler<CreateOrganizationRequest, CreateOrganizationResponse>
     {
         readonly IOrganizationRepository teamRepository;
         IMapper mapper;
@@ -16,14 +16,14 @@ namespace Qz.Application.Orgs.AddOrg
             this.teamRepository = teamRepository;
         }
 
-        public Task<ListMembersResponse> Handle(CreateOrganizationRequest request, CancellationToken cancellationToken)
+        public Task<CreateOrganizationResponse> Handle(CreateOrganizationRequest request, CancellationToken cancellationToken)
         {
             var team = Organization.CreateTeam(request.Name, request.Description, request.UserId.Value);
 
             var id = teamRepository.Save(team);
             team.Id = id;
 
-            return Task.FromResult(new ListMembersResponse
+            return Task.FromResult(new CreateOrganizationResponse
             {
                 TeamId = id
             });

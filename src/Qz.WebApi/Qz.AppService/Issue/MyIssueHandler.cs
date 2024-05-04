@@ -1,7 +1,6 @@
 ﻿using Qz.Application.Base;
 using Qz.Application.Base.Commands;
-using Qz.Application.Orgs.AddOrg;
-using Qz.Domain.Issues;
+using Qz.Domain.Workitems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +11,9 @@ namespace Qz.Application.Issue
 {
     public class MyIssueHandler : ICommandHandler<MyIssueCommand, MyIssueResponse>
     {
-        IIssueRepository issueRepository;
+        IWorkitemRepository issueRepository;
 
-        public MyIssueHandler(IIssueRepository issueRepository)
+        public MyIssueHandler(IWorkitemRepository issueRepository)
         {
             this.issueRepository = issueRepository;
         }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Qz.Domain.Users
+namespace Qz.Domain.Workitems
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IWorkitemRepository : IRepository<Workitem>
     {
-        User? FindByUserName(string email);
+        IEnumerable<Workitem> MyIssue(long orgId, long userId);
     }
 }

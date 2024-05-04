@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Dapper;
 using Dommel;
-using Qz.Domain.Orgs;
-using Qz.Domain.Types;
 using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
-using Organization = Qz.Domain.Orgs.Organization;
+using Organization = Qz.Domain.Organization.Organization;
 
 namespace Qz.Persistence.Repositorys
 {

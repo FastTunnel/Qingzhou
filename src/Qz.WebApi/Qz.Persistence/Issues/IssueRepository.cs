@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Dommel;
-using Qz.Domain.Issues;
-using Qz.Domain.Repositorys.Base;
+using Qz.Domain.Workitems;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
 using System;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Qz.Persistence.Issues
 {
-    public class IssueRepository : IIssueRepository
+    public class IssueRepository : IWorkitemRepository
     {
         readonly QingZhouDbContext dbContext;
         readonly IMapper mapper;
@@ -23,33 +22,33 @@ namespace Qz.Persistence.Issues
             this.dbContext = dbContext;
         }
 
-        public void Attach(Issue aggregate)
+        public void Attach(Workitem aggregate)
         {
             throw new NotImplementedException();
         }
 
-        public void Detach(Issue aggregate)
+        public void Detach(Workitem aggregate)
         {
             throw new NotImplementedException();
         }
 
-        public Issue? Find(long id)
+        public Workitem? Find(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Issue> MyIssue(long orgId, long userId)
+        public IEnumerable<Workitem> MyIssue(long orgId, long userId)
         {
-            var res = dbContext.Select<IssueEntity>(x => x.CreatedBy == userId && x.OrgId == orgId);
-            return res.Select(mapper.Map<Issue>);
+            var res = dbContext.Select<WorkitemEntity>(x => x.CreatedBy == userId && x.OrgId == orgId);
+            return res.Select(mapper.Map<Workitem>);
         }
 
-        public void Remove(Issue aggregate)
+        public void Remove(Workitem aggregate)
         {
             throw new NotImplementedException();
         }
 
-        public long Save(Issue aggregate)
+        public long Save(Workitem aggregate)
         {
             throw new NotImplementedException();
         }
