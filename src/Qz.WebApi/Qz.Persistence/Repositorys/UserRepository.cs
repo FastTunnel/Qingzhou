@@ -6,7 +6,7 @@ using Qz.Domain.Types;
 using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
 using Qz.Persistence.Extensions;
-using Organization = Qz.Domain.Orgs.Org;
+using Organization = Qz.Domain.Orgs.Organization;
 
 namespace Qz.Persistence.Repositorys
 {

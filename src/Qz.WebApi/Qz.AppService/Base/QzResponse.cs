@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NJsonSchema.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,6 @@ namespace Qz.Application.Base
         /// 错误信息
         /// </summary>
         public string? Message { get; set; }
-
-        public long Message1 { get; set; }
 
         public required string TraceId { get; set; }
     }

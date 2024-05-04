@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
+using NSwag.Generation.Processors;
+using Qz.Application;
 using Qz.Application.Base;
 using Qz.Application.Orgs.AddOrg;
 using Qz.Application.Todos.GetTodoItems;
@@ -45,7 +47,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
 
 builder.Services.AddAutoMapper(typeof(EntityProfile));
 
-builder.Services.AddTransient<AddTeamCommandHandler>();
+builder.Services.AddTransient<CreateOrganizationHandler>();
 
 builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delegate (JwtBearerOptions options)
 {
@@ -63,30 +65,35 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delega
 
     options.Events = new JwtBearerEvents
     {
-        OnMessageReceived = async delegate (MessageReceivedContext message)
-        {
-            // 商户后台的token
-            if (message.Request.Cookies.TryGetValue("Authorization", out string token))
-            {
-                message.Token = token.Replace("Bearer ", "");
-            }
+        //OnMessageReceived = async delegate (MessageReceivedContext message)
+        //{
+        //    // 商户后台的token
+        //    if (message.Request.Cookies.TryGetValue("Authorization", out string token))
+        //    {
+        //        message.Token = token.Replace("Bearer ", "");
+        //    }
 
-            if (message.Request.Headers.TryGetValue("JWT-Token", out var value2))
-            {
-                message.Token = value2[0]?.ToString().Replace("Bearer ", "");
-            }
-        },
+        //    if (message.Request.Headers.TryGetValue("JWT-Token", out var value2))
+        //    {
+        //        message.Token = value2[0]?.ToString().Replace("Bearer ", "");
+        //    }
+        //},
         OnChallenge = async delegate (JwtBearerChallengeContext context)
         {
             context.HandleResponse();
             context.Response.ContentType = "application/json;charset=utf-8";
             var msg = context.Error ?? "未登录";
-            await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(new QzResponse<object>
+
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new JsonLongConverter());
+            options.NumberHandling = JsonNumberHandling.AllowReadingFromString;
+
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new QzResponse<object>
             {
                 Success = false,
                 TraceId = context.HttpContext.TraceIdentifier,
                 Message = msg
-            }));
+            }, options));
         },
     };
 });
@@ -94,24 +101,26 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delega
 // https://github.com/RicoSuter/NSwag/wiki/TypeScriptClientGenerator
 builder.Services.AddOpenApiDocument(options =>
 {
+    options.DocumentProcessors.Add(new MyDocumentProcessor());
+
+    options.SchemaSettings.SchemaProcessors.Add(new MySchemaProcessor());
     options.PostProcess = document =>
     {
         document.Info = new OpenApiInfo
         {
             Version = "v1",
             Title = "轻舟 RestAPI",
-            Description = "An ASP.NET Core Web API for managing ToDo items",
-            TermsOfService = "https://example.com/terms",
-            Contact = new OpenApiContact
-            {
-                Name = "Example Contact",
-                Url = "https://example.com/contact"
-            },
-            License = new OpenApiLicense
-            {
-                Name = "Example License",
-                Url = "https://example.com/license"
-            }
+            //TermsOfService = "https://example.com/terms",
+            //Contact = new OpenApiContact
+            //{
+            //    Name = "Example Contact",
+            //    Url = "https://example.com/contact"
+            //},
+            //License = new OpenApiLicense
+            //{
+            //    Name = "Example License",
+            //    Url = "https://example.com/license"
+            //}
         };
     };
 });
@@ -139,7 +148,7 @@ builder.Services.AddDistributedMemoryCache();
 
 // 注册容器
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IOrgRepository, OrgRepository>();
+builder.Services.AddTransient<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddTransient<ITodoItemRepository, TodoItemRepository>();
 builder.Services.AddTransient<IIssueRepository, IssueRepository>();
 

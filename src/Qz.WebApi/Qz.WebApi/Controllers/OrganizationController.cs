@@ -22,7 +22,7 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<QzResponse<AddTeamResponse>> createOrganization(AddTeamCommand request)
+        public async Task<QzResponse<ListMembersResponse>> createOrganization(CreateOrganizationRequest request)
         {
             request.UserId = CurrentUser.UserId;
             return Success(await mediator.Send(request));

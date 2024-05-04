@@ -11,6 +11,6 @@ namespace Qz.Application.User.Login
     {
         public string Token { get; set; }
 
-        public IEnumerable<Org> Teams { get; set; }
+        public IEnumerable<Organization> Teams { get; set; }
     }
 }

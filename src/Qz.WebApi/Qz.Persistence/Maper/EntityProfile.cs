@@ -3,7 +3,7 @@ using Qz.Domain.Issues;
 using Qz.Domain.TodoItems;
 using Qz.Domain.Users;
 using Qz.Persistence.Entitys;
-using Organization = Qz.Domain.Orgs.Org;
+using Organization = Qz.Domain.Orgs.Organization;
 
 namespace Qz.Persistence.Maper
 {

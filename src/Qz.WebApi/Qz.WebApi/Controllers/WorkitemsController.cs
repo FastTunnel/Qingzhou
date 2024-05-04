@@ -19,11 +19,11 @@ namespace Qz.WebApi.Controllers
         }
 
         [HttpGet("MyIssue")]
-        public async Task<QzResponse<MyIssueResponse>> MyIssueAsync([Required] long orgId)
+        public async Task<QzResponse<MyIssueResponse>> MyIssueAsync([Required] long organizationId)
         {
             var res = await mediator.Send(new MyIssueCommand()
             {
-                OrgId = orgId,
+                OrgId = organizationId,
                 UserId = CurrentUser.UserId
             });
 

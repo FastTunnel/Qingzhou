@@ -9,6 +9,6 @@ namespace Qz.Application.Orgs.ListOrg
 {
     public class ListOrgResponse
     {
-        public required IEnumerable<Org> Orgs { get; set; }
+        public required IEnumerable<Organization> Orgs { get; set; }
     }
 }
