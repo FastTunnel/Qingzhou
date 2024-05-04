@@ -21,7 +21,6 @@ using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -92,6 +91,7 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delega
     };
 });
 
+// https://github.com/RicoSuter/NSwag/wiki/TypeScriptClientGenerator
 builder.Services.AddOpenApiDocument(options =>
 {
     options.PostProcess = document =>
@@ -147,7 +147,10 @@ builder.Services.AddCors((options) =>
 {
     options.AddPolicy("default", policy =>
     {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        policy.WithOrigins("http://127.0.0.1:5173")
+            .WithOrigins("127.0.0.1:5173")
+            .AllowAnyMethod()
+            .AllowAnyHeader().AllowCredentials();
     });
 });
 
@@ -161,7 +164,9 @@ if (app.Environment.IsDevelopment())
 
     // Add web UIs to interact with the document
     // Available at: http://localhost:<port>/swagger
-    app.UseSwaggerUi(); // UseSwaggerUI Protected by if (env.IsDevelopment())
+    app.UseSwaggerUi(c =>
+    {
+    }); // UseSwaggerUI Protected by if (env.IsDevelopment())
 
     app.UseReDoc(options =>
     {

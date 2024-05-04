@@ -33,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Qz.Application.Contracts\Qz.Application.Contracts.csproj" />
     <ProjectReference Include="..\Qz.Domain\Qz.Domain.csproj" />
     <ProjectReference Include="..\Qz.Utility\Qz.Utility.csproj" />
   </ItemGroup>

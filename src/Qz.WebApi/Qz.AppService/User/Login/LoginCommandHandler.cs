@@ -49,7 +49,7 @@ namespace Qz.Application.User.Login
                     })),
             };
 
-            var token = JWTTokenManager.GenerateToken(claims, config.GetSection("JWT")["SigningKey"]);
+            var token = "Bearer " + JWTTokenManager.GenerateToken(claims, config.GetSection("JWT")["SigningKey"]);
 
             return Task.FromResult(new LoginResponse
             {

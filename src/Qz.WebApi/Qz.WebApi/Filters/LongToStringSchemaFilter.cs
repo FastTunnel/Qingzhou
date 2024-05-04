@@ -1,6 +1,5 @@
 ﻿namespace Qz.WebApi.Filters
 {
-    using Swashbuckle.AspNetCore.SwaggerGen;
     using System;
     using System.Linq;
     using System.Reflection;

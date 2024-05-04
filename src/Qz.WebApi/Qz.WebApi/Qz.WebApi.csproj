@@ -9,14 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Filters\LongToStringSchemaFilter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.0.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Qz.AppService\Qz.Application.csproj" />
-    <ProjectReference Include="..\Qz.Cache\Qz.Cache.csproj" />
+    <ProjectReference Include="..\Qz.Cache\Qz.Cache.csproj" /> 
     <ProjectReference Include="..\Qz.Domain\Qz.Domain.csproj" />
     <ProjectReference Include="..\Qz.Gateway\Qz.Gateway.csproj" />
     <ProjectReference Include="..\Qz.Persistence\Qz.Persistence.csproj" />
