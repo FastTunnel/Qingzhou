@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using NSwag;
-using NSwag.Generation.Processors;
 using Qz.Application;
 using Qz.Application.Base;
 using Qz.Application.Orgs.CreateOrganization;
@@ -20,6 +19,7 @@ using Qz.Persistence.Repositorys;
 using Qz.WebApi.Filters;
 using Qz.WebApi.Json;
 using Qz.WebApi.Services;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -100,31 +100,10 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delega
     };
 });
 
-// https://github.com/RicoSuter/NSwag/wiki/TypeScriptClientGenerator
-builder.Services.AddOpenApiDocument(options =>
+builder.Services.AddSwaggerGen(options =>
 {
-    options.DocumentProcessors.Add(new MyDocumentProcessor());
-
-    options.SchemaSettings.SchemaProcessors.Add(new MySchemaProcessor());
-    options.PostProcess = document =>
-    {
-        document.Info = new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "«·÷€ RestAPI",
-            //TermsOfService = "https://example.com/terms",
-            //Contact = new OpenApiContact
-            //{
-            //    Name = "Example Contact",
-            //    Url = "https://example.com/contact"
-            //},
-            //License = new OpenApiLicense
-            //{
-            //    Name = "Example License",
-            //    Url = "https://example.com/license"
-            //}
-        };
-    };
+    options.ParameterFilter<MyParameterFilter>();
+    options.SchemaFilter<MySchemaFilter>();
 });
 
 builder.Services.AddDapperDBContext<QingZhouDbContext>(options =>
@@ -170,23 +149,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    // Add OpenAPI 3.0 document serving middleware
-    // Available at: http://localhost:<port>/swagger/v1/swagger.json
-    app.UseOpenApi(c =>
-    {
-
-    });
-
-    // Add web UIs to interact with the document
-    // Available at: http://localhost:<port>/swagger
-    app.UseSwaggerUi(c =>
-    {
-    }); // UseSwaggerUI Protected by if (env.IsDevelopment())
-
-    app.UseReDoc(options =>
-    {
-        options.Path = "/redoc";
-    });
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseCors("default");

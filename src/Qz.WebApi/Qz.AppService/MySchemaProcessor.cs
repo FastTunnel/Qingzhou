@@ -1,21 +1,28 @@
-﻿using NJsonSchema;
-using NJsonSchema.Generation;
+﻿using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Qz.Application
 {
-    public class MySchemaProcessor : ISchemaProcessor
+    public class MySchemaFilter : ISchemaFilter
     {
-        public void Process(SchemaProcessorContext context)
+        public void Apply(Microsoft.OpenApi.Models.OpenApiSchema schema, SchemaFilterContext context)
         {
-            if (context.Schema.Properties.Count > 0)
+            foreach (var item in schema.Properties)
             {
-                foreach (var item in context.Schema.Properties)
+                if (item.Value.Type == "integer" && item.Value.Format == "int64")
                 {
-                    if (item.Value.Type == JsonObjectType.Integer && item.Value.Format == "int64")
-                    {
-                        item.Value.Type = JsonObjectType.String;
-                    }
+                    item.Value.Type = "string";
                 }
+            }
+        }
+    }
+
+    public class MyParameterFilter : IParameterFilter
+    {
+        public void Apply(Microsoft.OpenApi.Models.OpenApiParameter parameter, ParameterFilterContext context)
+        {
+            if (parameter.Schema.Type == "integer" && parameter.Schema.Format == "int64")
+            {
+                parameter.Schema.Type = "string";
             }
         }
     }

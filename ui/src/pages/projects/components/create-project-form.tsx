@@ -13,6 +13,7 @@ import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Action } from "@/common/types";
+import { ProjectsApi } from "@/apis-gen";
 
 const formSchema = z.object({
     projectName: z.string().min(2, {
@@ -35,13 +36,13 @@ export function CreateProjectForm({ onBack, onSuccess }: { onBack?: MouseEventHa
     }
 
     const [template, setTemplate] = useState("");
-    const { status, data, error, isFetching } = useProjectTemplates(params.teamid);
+    // const { status, data, error, isFetching } = useProjectTemplates(params.teamid);
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const mutation = useMutation({
         mutationFn: (formData: z.infer<typeof formSchema>) => {
             setIsLoading(true);
-            return new CreateProject().doRequest({ ...formData })
+            return new ProjectsApi().projectsCreateProject({ organizationId: params.teamid, createProjectRequest: { ...formData } })
         },
         onSuccess: (data) => {
             console.log(data);

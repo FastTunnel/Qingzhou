@@ -1,5 +1,4 @@
-﻿using NSwag.Annotations;
-using Qz.Application.Base.Commands;
+﻿using Qz.Application.Base.Commands;
 using Qz.Application.Base.Queries;
 using Qz.Application.Todos.GetTodoItems;
 using System;
@@ -20,8 +19,8 @@ namespace Qz.Application.Projects.CreateProject
         [JsonIgnore]
         public long CreatedBy { get; set; }
 
-        public string ProjectName { get; set; }
+        public string ProjectName { get; set; } = null!;
 
-        public string Describe { get; set; }
+        public string Describe { get; set; } = null!;
     }
 }
