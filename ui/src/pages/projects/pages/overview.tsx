@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 function useProject(id: string | undefined) {
     return useQuery({
         queryKey: ['project', id],
-        queryFn: () => new ProjectsApi(config).projectsListProjects({
+        queryFn: () => new ProjectsApi(config).listProjects({
             organizationId: id
         }),
     },)

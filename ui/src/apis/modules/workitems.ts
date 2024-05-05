@@ -6,7 +6,7 @@ export function useMyIssues(organizationId: string) {
   return useQuery({
     queryKey: ["orgs"],
     queryFn: () =>
-      new WorkitemsApi(config).workitemsMyIssue({
+      new WorkitemsApi(config).myIssue({
         organizationId: organizationId,
       }),
   });

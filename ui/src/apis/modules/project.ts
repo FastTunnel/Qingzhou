@@ -6,7 +6,7 @@ export function useProjects(name: string | undefined, teamId: string) {
   return useQuery({
     queryKey: ["projectViews"],
     queryFn: () =>
-      new ProjectsApi(config).projectsListProjects({
+      new ProjectsApi(config).listProjects({
         organizationId: teamId,
       }),
   });

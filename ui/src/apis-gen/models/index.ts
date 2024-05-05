@@ -21,4 +21,7 @@ export * from './MyIssueResponseQzResponse';
 export * from './Organization';
 export * from './Project';
 export * from './StringQzResponse';
+export * from './TodoDto';
+export * from './TodoItemResponse';
+export * from './TodoItemResponseQzResponse';
 export * from './Workitem';

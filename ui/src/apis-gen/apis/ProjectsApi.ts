@@ -31,12 +31,12 @@ import {
     ListProjectResponseQzResponseToJSON,
 } from '../models/index';
 
-export interface ApiOrganizationOrganizationIdProjectsCreateProjectPostRequest {
+export interface CreateProjectOperationRequest {
     organizationId: string;
     createProjectRequest?: CreateProjectRequest;
 }
 
-export interface ApiOrganizationOrganizationIdProjectsListProjectsGetRequest {
+export interface ListProjectsRequest {
     organizationId: string;
     listProjectRequest?: ListProjectRequest;
 }
@@ -48,11 +48,11 @@ export class ProjectsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdProjectsCreateProjectPostRaw(requestParameters: ApiOrganizationOrganizationIdProjectsCreateProjectPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProjectResponseQzResponse>> {
+    async createProjectRaw(requestParameters: CreateProjectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProjectResponseQzResponse>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
-                'Required parameter "organizationId" was null or undefined when calling apiOrganizationOrganizationIdProjectsCreateProjectPost().'
+                'Required parameter "organizationId" was null or undefined when calling createProject().'
             );
         }
 
@@ -75,18 +75,18 @@ export class ProjectsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdProjectsCreateProjectPost(requestParameters: ApiOrganizationOrganizationIdProjectsCreateProjectPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProjectResponseQzResponse> {
-        const response = await this.apiOrganizationOrganizationIdProjectsCreateProjectPostRaw(requestParameters, initOverrides);
+    async createProject(requestParameters: CreateProjectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProjectResponseQzResponse> {
+        const response = await this.createProjectRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async apiOrganizationOrganizationIdProjectsListProjectsGetRaw(requestParameters: ApiOrganizationOrganizationIdProjectsListProjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListProjectResponseQzResponse>> {
+    async listProjectsRaw(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListProjectResponseQzResponse>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
-                'Required parameter "organizationId" was null or undefined when calling apiOrganizationOrganizationIdProjectsListProjectsGet().'
+                'Required parameter "organizationId" was null or undefined when calling listProjects().'
             );
         }
 
@@ -109,8 +109,8 @@ export class ProjectsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdProjectsListProjectsGet(requestParameters: ApiOrganizationOrganizationIdProjectsListProjectsGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListProjectResponseQzResponse> {
-        const response = await this.apiOrganizationOrganizationIdProjectsListProjectsGetRaw(requestParameters, initOverrides);
+    async listProjects(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListProjectResponseQzResponse> {
+        const response = await this.listProjectsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

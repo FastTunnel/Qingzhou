@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,7 @@ using Qz.WebApi.Filters;
 using Qz.WebApi.Json;
 using Qz.WebApi.Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -67,19 +69,6 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delega
 
     options.Events = new JwtBearerEvents
     {
-        //OnMessageReceived = async delegate (MessageReceivedContext message)
-        //{
-        //    // 商户后台的token
-        //    if (message.Request.Cookies.TryGetValue("Authorization", out string token))
-        //    {
-        //        message.Token = token.Replace("Bearer ", "");
-        //    }
-
-        //    if (message.Request.Headers.TryGetValue("JWT-Token", out var value2))
-        //    {
-        //        message.Token = value2[0]?.ToString().Replace("Bearer ", "");
-        //    }
-        //},
         OnChallenge = async delegate (JwtBearerChallengeContext context)
         {
             context.HandleResponse();
@@ -104,6 +93,10 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.ParameterFilter<MyParameterFilter>();
     options.SchemaFilter<MySchemaFilter>();
+    options.CustomOperationIds(apiDesc =>
+    {
+        return (apiDesc.ActionDescriptor as ControllerActionDescriptor)!.ActionName; // apiDesc.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo.Name.Replace("Async", string.Empty) : null;
+    });
 });
 
 builder.Services.AddDapperDBContext<QingZhouDbContext>(options =>

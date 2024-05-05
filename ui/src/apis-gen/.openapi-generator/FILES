@@ -1,7 +1,7 @@
-.openapi-generator-ignore
 apis/MembersApi.ts
 apis/OrganizationApi.ts
 apis/ProjectsApi.ts
+apis/TodoItemApi.ts
 apis/UserApi.ts
 apis/WorkitemsApi.ts
 apis/index.ts
@@ -27,6 +27,9 @@ models/MyIssueResponseQzResponse.ts
 models/Organization.ts
 models/Project.ts
 models/StringQzResponse.ts
+models/TodoDto.ts
+models/TodoItemResponse.ts
+models/TodoItemResponseQzResponse.ts
 models/Workitem.ts
 models/index.ts
 runtime.ts

@@ -25,7 +25,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       const name = formData.get("name")?.valueOf().toString() ?? (() => { throw new Error("Name is not defined"); })();
       const password = formData.get("password")?.valueOf().toString() ?? (() => { throw new Error("Password is not defined"); })();
       setIsLoading(true)
-      return new UserApi(config).userLogin({ loginCommand: { userName: name, password: password } })
+      return new UserApi(config).login({ loginCommand: { userName: name, password: password } })
     },
     onSuccess: (data) => {
       console.log("登录成功", data.data);

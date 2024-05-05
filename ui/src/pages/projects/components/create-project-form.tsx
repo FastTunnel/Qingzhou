@@ -42,7 +42,7 @@ export function CreateProjectForm({ onBack, onSuccess }: { onBack?: MouseEventHa
     const mutation = useMutation({
         mutationFn: (formData: z.infer<typeof formSchema>) => {
             setIsLoading(true);
-            return new ProjectsApi().projectsCreateProject({ organizationId: params.teamid, createProjectRequest: { ...formData } })
+            return new ProjectsApi().createProject({ organizationId: params.teamid!, createProjectRequest: { ...formData } })
         },
         onSuccess: (data) => {
             console.log(data);

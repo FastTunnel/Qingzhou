@@ -10,6 +10,6 @@ export function useOrgs() {
 
   return useQuery({
     queryKey: ["orgs"],
-    queryFn: () => new OrganizationApi(config).organizationListOrganizations(),
+    queryFn: () => new OrganizationApi(config).listOrganizations(),
   });
 }

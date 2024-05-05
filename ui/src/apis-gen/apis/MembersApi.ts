@@ -25,13 +25,13 @@ import {
     MemberResponseQzResponseToJSON,
 } from '../models/index';
 
-export interface ApiOrganizationOrganizationIdMembersAccountIdGetRequest {
+export interface ListMembersRequest {
     organizationId: string;
-    accountId: string;
 }
 
-export interface ApiOrganizationOrganizationIdMembersGetRequest {
+export interface MemberRequest {
     organizationId: string;
+    accountId: string;
 }
 
 /**
@@ -41,49 +41,11 @@ export class MembersApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdMembersAccountIdGetRaw(requestParameters: ApiOrganizationOrganizationIdMembersAccountIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MemberResponseQzResponse>> {
+    async listMembersRaw(requestParameters: ListMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListMembersResponseQzResponse>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
-                'Required parameter "organizationId" was null or undefined when calling apiOrganizationOrganizationIdMembersAccountIdGet().'
-            );
-        }
-
-        if (requestParameters['accountId'] == null) {
-            throw new runtime.RequiredError(
-                'accountId',
-                'Required parameter "accountId" was null or undefined when calling apiOrganizationOrganizationIdMembersAccountIdGet().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        const response = await this.request({
-            path: `/api/Organization/{organizationId}/Members/{accountId}`.replace(`{${"organizationId"}}`, encodeURIComponent(String(requestParameters['organizationId']))).replace(`{${"accountId"}}`, encodeURIComponent(String(requestParameters['accountId']))),
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => MemberResponseQzResponseFromJSON(jsonValue));
-    }
-
-    /**
-     */
-    async apiOrganizationOrganizationIdMembersAccountIdGet(requestParameters: ApiOrganizationOrganizationIdMembersAccountIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MemberResponseQzResponse> {
-        const response = await this.apiOrganizationOrganizationIdMembersAccountIdGetRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     */
-    async apiOrganizationOrganizationIdMembersGetRaw(requestParameters: ApiOrganizationOrganizationIdMembersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListMembersResponseQzResponse>> {
-        if (requestParameters['organizationId'] == null) {
-            throw new runtime.RequiredError(
-                'organizationId',
-                'Required parameter "organizationId" was null or undefined when calling apiOrganizationOrganizationIdMembersGet().'
+                'Required parameter "organizationId" was null or undefined when calling listMembers().'
             );
         }
 
@@ -103,8 +65,46 @@ export class MembersApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdMembersGet(requestParameters: ApiOrganizationOrganizationIdMembersGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListMembersResponseQzResponse> {
-        const response = await this.apiOrganizationOrganizationIdMembersGetRaw(requestParameters, initOverrides);
+    async listMembers(requestParameters: ListMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListMembersResponseQzResponse> {
+        const response = await this.listMembersRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async memberRaw(requestParameters: MemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MemberResponseQzResponse>> {
+        if (requestParameters['organizationId'] == null) {
+            throw new runtime.RequiredError(
+                'organizationId',
+                'Required parameter "organizationId" was null or undefined when calling member().'
+            );
+        }
+
+        if (requestParameters['accountId'] == null) {
+            throw new runtime.RequiredError(
+                'accountId',
+                'Required parameter "accountId" was null or undefined when calling member().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/Organization/{organizationId}/Members/{accountId}`.replace(`{${"organizationId"}}`, encodeURIComponent(String(requestParameters['organizationId']))).replace(`{${"accountId"}}`, encodeURIComponent(String(requestParameters['accountId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MemberResponseQzResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async member(requestParameters: MemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MemberResponseQzResponse> {
+        const response = await this.memberRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

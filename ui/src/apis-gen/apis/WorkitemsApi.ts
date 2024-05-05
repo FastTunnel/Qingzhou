@@ -22,7 +22,7 @@ import {
     MyIssueResponseQzResponseToJSON,
 } from '../models/index';
 
-export interface ApiOrganizationOrganizationIdWorkitemsMyIssueGetRequest {
+export interface MyIssueRequest {
     organizationId: string;
 }
 
@@ -33,11 +33,11 @@ export class WorkitemsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdWorkitemsMyIssueGetRaw(requestParameters: ApiOrganizationOrganizationIdWorkitemsMyIssueGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MyIssueResponseQzResponse>> {
+    async myIssueRaw(requestParameters: MyIssueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MyIssueResponseQzResponse>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
-                'Required parameter "organizationId" was null or undefined when calling apiOrganizationOrganizationIdWorkitemsMyIssueGet().'
+                'Required parameter "organizationId" was null or undefined when calling myIssue().'
             );
         }
 
@@ -57,8 +57,8 @@ export class WorkitemsApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiOrganizationOrganizationIdWorkitemsMyIssueGet(requestParameters: ApiOrganizationOrganizationIdWorkitemsMyIssueGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MyIssueResponseQzResponse> {
-        const response = await this.apiOrganizationOrganizationIdWorkitemsMyIssueGetRaw(requestParameters, initOverrides);
+    async myIssue(requestParameters: MyIssueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MyIssueResponseQzResponse> {
+        const response = await this.myIssueRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

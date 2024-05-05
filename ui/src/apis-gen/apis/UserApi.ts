@@ -25,7 +25,7 @@ import {
     LoginResponseQzResponseToJSON,
 } from '../models/index';
 
-export interface ApiUserLoginPostRequest {
+export interface LoginRequest {
     loginCommand?: LoginCommand;
 }
 
@@ -36,7 +36,7 @@ export class UserApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiUserLoginPostRaw(requestParameters: ApiUserLoginPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoginResponseQzResponse>> {
+    async loginRaw(requestParameters: LoginRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoginResponseQzResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -56,8 +56,8 @@ export class UserApi extends runtime.BaseAPI {
 
     /**
      */
-    async apiUserLoginPost(requestParameters: ApiUserLoginPostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LoginResponseQzResponse> {
-        const response = await this.apiUserLoginPostRaw(requestParameters, initOverrides);
+    async login(requestParameters: LoginRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LoginResponseQzResponse> {
+        const response = await this.loginRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
