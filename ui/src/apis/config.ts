@@ -25,6 +25,16 @@ const config = new Configuration({
           resolve(context);
         });
       },
+      post(context) {
+        return new Promise((resolve, reject) => {
+          console.log("post", context);
+          if (context.response.status == 200) {
+            resolve();
+          }
+
+          reject();
+        });
+      },
     },
   ],
 });

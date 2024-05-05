@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Qz.Application.Base;
@@ -17,15 +18,9 @@ namespace Qz.WebApi.Filters
         public override void OnException(ExceptionContext context)
         {
             _logger.LogError(context.Exception, "【全局异常捕获】");
-            var res = new QzResponse<object>()
-            {
-                Success = false,
-                Data = null,
-                Message = context.Exception.Message,
-                TraceId = context.HttpContext.TraceIdentifier
-            };
+            var res = new ErrorInfo("异常：" + context.Exception.Message, null, context.HttpContext.TraceIdentifier);
 
-            var result = new JsonResult(res) { StatusCode = 200 };
+            var result = new JsonResult(res) { StatusCode = StatusCodes.Status200OK };
 
             context.Result = result;
             context.ExceptionHandled = true;

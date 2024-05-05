@@ -16,19 +16,16 @@
 import * as runtime from '../runtime';
 import type {
   CreateProjectRequest,
-  CreateProjectResponseQzResponse,
+  CreateProjectResponse,
   ListProjectRequest,
-  ListProjectResponseQzResponse,
 } from '../models/index';
 import {
     CreateProjectRequestFromJSON,
     CreateProjectRequestToJSON,
-    CreateProjectResponseQzResponseFromJSON,
-    CreateProjectResponseQzResponseToJSON,
+    CreateProjectResponseFromJSON,
+    CreateProjectResponseToJSON,
     ListProjectRequestFromJSON,
     ListProjectRequestToJSON,
-    ListProjectResponseQzResponseFromJSON,
-    ListProjectResponseQzResponseToJSON,
 } from '../models/index';
 
 export interface CreateProjectOperationRequest {
@@ -48,7 +45,7 @@ export class ProjectsApi extends runtime.BaseAPI {
 
     /**
      */
-    async createProjectRaw(requestParameters: CreateProjectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProjectResponseQzResponse>> {
+    async createProjectRaw(requestParameters: CreateProjectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateProjectResponse>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
@@ -70,19 +67,19 @@ export class ProjectsApi extends runtime.BaseAPI {
             body: CreateProjectRequestToJSON(requestParameters['createProjectRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProjectResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateProjectResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async createProject(requestParameters: CreateProjectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProjectResponseQzResponse> {
+    async createProject(requestParameters: CreateProjectOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateProjectResponse> {
         const response = await this.createProjectRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async listProjectsRaw(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListProjectResponseQzResponse>> {
+    async listProjectsRaw(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
@@ -104,12 +101,12 @@ export class ProjectsApi extends runtime.BaseAPI {
             body: ListProjectRequestToJSON(requestParameters['listProjectRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ListProjectResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
      */
-    async listProjects(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListProjectResponseQzResponse> {
+    async listProjects(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
         const response = await this.listProjectsRaw(requestParameters, initOverrides);
         return await response.value();
     }

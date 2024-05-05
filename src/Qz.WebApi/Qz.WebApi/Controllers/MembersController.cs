@@ -10,31 +10,30 @@ namespace Qz.WebApi.Controllers
     public class MembersController : BaseController
     {
         private readonly ILogger<OrganizationController> _logger;
-        private readonly IMediator mediator;
 
-        public MembersController(ILogger<OrganizationController> logger, IMediator mediator)
+        public MembersController(IMediator mediator, ILogger<OrganizationController> logger)
+            : base(mediator)
         {
             _logger = logger;
-            this.mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<QzResponse<ListMembersResponse>> ListMembers(long organizationId)
+        public async Task<ListMembersResponse> ListMembers(long organizationId)
         {
-            return Success(await mediator.Send(new ListMembersRequest
+            return await RequestAsync<ListMembersRequest, ListMembersResponse>(new ListMembersRequest
             {
                 OrganizationId = organizationId
-            }));
+            });
         }
 
         [HttpGet("{accountId}")]
-        public async Task<QzResponse<MemberResponse>> Member(long organizationId, long accountId)
+        public async Task<MemberResponse> Member(long organizationId, long accountId)
         {
-            return Success(await mediator.Send(new MemberRequest
+            return await RequestAsync<MemberRequest, MemberResponse>(new MemberRequest
             {
                 AccountId = accountId,
                 OrganizationId = organizationId
-            }));
+            });
         }
     }
 }

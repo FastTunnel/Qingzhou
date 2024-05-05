@@ -11,18 +11,16 @@ namespace Qz.WebApi.Controllers
 {
     public class UserController : BaseController
     {
-        private readonly ILogger<UserController> _logger;
-
-        public UserController(ILogger<UserController> logger)
+        public UserController(IMediator mediator)
+            : base(mediator)
         {
-            _logger = logger;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<QzResponse<LoginResponse>> Login([FromServices] IMediator mediator, LoginCommand request)
+        public async Task<LoginResponse> GetToken(LoginCommand request)
         {
-            return Success<LoginResponse>(await mediator.Send(request));
+            return await RequestAsync<LoginCommand, LoginResponse>(request);
         }
     }
 }

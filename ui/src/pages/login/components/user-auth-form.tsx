@@ -25,16 +25,16 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       const name = formData.get("name")?.valueOf().toString() ?? (() => { throw new Error("Name is not defined"); })();
       const password = formData.get("password")?.valueOf().toString() ?? (() => { throw new Error("Password is not defined"); })();
       setIsLoading(true)
-      return new UserApi(config).login({ loginCommand: { userName: name, password: password } })
+      return new UserApi(config).getToken({ loginCommand: { userName: name, password: password } })
     },
     onSuccess: (data) => {
-      console.log("登录成功", data.data);
-      if (!data.data?.token) {
+      console.log("登录成功", data);
+      if (!data?.token) {
         toast.error("返回值异常");
         return
       }
 
-      setToken(data.data.token);
+      setToken(data.token);
       toast.success("登录成功");
       navigate(`/orgs`, { replace: true })
     },

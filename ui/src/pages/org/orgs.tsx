@@ -1,4 +1,4 @@
-import { Org } from "@/apis-gen";
+import { Organization } from "@/apis-gen";
 import { useOrgs } from "@/apis/modules/organization";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export function Orgs() {
         navigate(`/${orgId}/workbench`, { replace: true })
     }
 
-    function Content(list: Org[]) {
+    function Content(list: Organization[]) {
         return <div className="container content-center justify-center  pt-10 ">
             <h1 className="text-xl font-bold py-2">我的团队</h1>
             <div className="flex flex-row gap-4">
@@ -34,7 +34,7 @@ export function Orgs() {
     } else if (error instanceof Error) {
         return <span>Error: {error.message}</span>;
     } else {
-        return data?.data?.orgs ? (data.data.orgs.length == 1 ? <Navigate to={`/${data?.data?.orgs[0].id}/workbench`} replace /> : Content(data.data.orgs))
+        return data?.orgs ? (data.orgs.length == 1 ? <Navigate to={`/${data?.orgs[0].id}/workbench`} replace /> : Content(data.orgs))
             : <Navigate to="/create-team" replace />;
     }
 }

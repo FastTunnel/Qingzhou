@@ -15,17 +15,14 @@
 
 import * as runtime from '../runtime';
 import type {
-  StringQzResponse,
   TodoDto,
-  TodoItemResponseQzResponse,
+  TodoItemResponse,
 } from '../models/index';
 import {
-    StringQzResponseFromJSON,
-    StringQzResponseToJSON,
     TodoDtoFromJSON,
     TodoDtoToJSON,
-    TodoItemResponseQzResponseFromJSON,
-    TodoItemResponseQzResponseToJSON,
+    TodoItemResponseFromJSON,
+    TodoItemResponseToJSON,
 } from '../models/index';
 
 export interface DeleteRequest {
@@ -51,7 +48,7 @@ export class TodoItemApi extends runtime.BaseAPI {
 
     /**
      */
-    async _deleteRaw(requestParameters: DeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StringQzResponse>> {
+    async _deleteRaw(requestParameters: DeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         if (requestParameters['id'] != null) {
@@ -67,19 +64,18 @@ export class TodoItemApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StringQzResponseFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      */
-    async _delete(requestParameters: DeleteRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StringQzResponse> {
-        const response = await this._deleteRaw(requestParameters, initOverrides);
-        return await response.value();
+    async _delete(requestParameters: DeleteRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this._deleteRaw(requestParameters, initOverrides);
     }
 
     /**
      */
-    async getRaw(requestParameters: GetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TodoItemResponseQzResponse>> {
+    async getRaw(requestParameters: GetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TodoItemResponse>> {
         const queryParameters: any = {};
 
         if (requestParameters['id'] != null) {
@@ -95,19 +91,19 @@ export class TodoItemApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => TodoItemResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => TodoItemResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async get(requestParameters: GetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TodoItemResponseQzResponse> {
+    async get(requestParameters: GetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TodoItemResponse> {
         const response = await this.getRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async postRaw(requestParameters: PostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StringQzResponse>> {
+    async postRaw(requestParameters: PostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -122,19 +118,18 @@ export class TodoItemApi extends runtime.BaseAPI {
             body: TodoDtoToJSON(requestParameters['todoDto']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StringQzResponseFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      */
-    async post(requestParameters: PostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StringQzResponse> {
-        const response = await this.postRaw(requestParameters, initOverrides);
-        return await response.value();
+    async post(requestParameters: PostRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.postRaw(requestParameters, initOverrides);
     }
 
     /**
      */
-    async putRaw(requestParameters: PutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StringQzResponse>> {
+    async putRaw(requestParameters: PutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -149,14 +144,13 @@ export class TodoItemApi extends runtime.BaseAPI {
             body: TodoDtoToJSON(requestParameters['todoDto']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StringQzResponseFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      */
-    async put(requestParameters: PutRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StringQzResponse> {
-        const response = await this.putRaw(requestParameters, initOverrides);
-        return await response.value();
+    async put(requestParameters: PutRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.putRaw(requestParameters, initOverrides);
     }
 
 }

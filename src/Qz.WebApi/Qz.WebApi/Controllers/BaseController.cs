@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Qz.Application.Base;
+using Qz.Application.Base.Commands;
+using Qz.Application.Base.Queries;
+using Qz.Application.Projects.ListProject;
 using Qz.WebApi.Filters;
 using System.Text.Json;
 
@@ -12,6 +16,20 @@ namespace Qz.WebApi.Controllers
     [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
     public class BaseController : ControllerBase
     {
+        protected readonly IMediator mediator;
+
+        public BaseController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
+        [NonAction]
+        protected async Task<TResult> RequestAsync<TCommand, TResult>(TCommand command)
+            where TCommand : IRequest<TResult>
+        {
+            return await mediator.Send(command);
+        }
+
         public CurrentUser CurrentUser
         {
             get
@@ -27,27 +45,9 @@ namespace Qz.WebApi.Controllers
         }
 
         [NonAction]
-        public virtual QzResponse<T> Success<T>(T data, string? msg = null)
+        public virtual ErrorInfo Fail<T>(string msg, Dictionary<string, string[]> erros)
         {
-            return new QzResponse<T>
-            {
-                Success = true,
-                Data = data,
-                Message = msg,
-                TraceId = Request.HttpContext.TraceIdentifier
-            };
-        }
-
-        [NonAction]
-        public virtual QzResponse<T> Fail<T>(T data, string msg)
-        {
-            return new QzResponse<T>
-            {
-                Success = false,
-                Data = data,
-                Message = msg,
-                TraceId = Request.HttpContext.TraceIdentifier
-            };
+            return new ErrorInfo(msg, erros, Request.HttpContext.TraceIdentifier);
         }
     }
 }

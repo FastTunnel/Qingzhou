@@ -14,16 +14,6 @@
 
 
 import * as runtime from '../runtime';
-import type {
-  ListMembersResponseQzResponse,
-  MemberResponseQzResponse,
-} from '../models/index';
-import {
-    ListMembersResponseQzResponseFromJSON,
-    ListMembersResponseQzResponseToJSON,
-    MemberResponseQzResponseFromJSON,
-    MemberResponseQzResponseToJSON,
-} from '../models/index';
 
 export interface ListMembersRequest {
     organizationId: string;
@@ -41,7 +31,7 @@ export class MembersApi extends runtime.BaseAPI {
 
     /**
      */
-    async listMembersRaw(requestParameters: ListMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListMembersResponseQzResponse>> {
+    async listMembersRaw(requestParameters: ListMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
@@ -60,19 +50,19 @@ export class MembersApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ListMembersResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
      */
-    async listMembers(requestParameters: ListMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListMembersResponseQzResponse> {
+    async listMembers(requestParameters: ListMembersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
         const response = await this.listMembersRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async memberRaw(requestParameters: MemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MemberResponseQzResponse>> {
+    async memberRaw(requestParameters: MemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<object>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
@@ -98,12 +88,12 @@ export class MembersApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => MemberResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse<any>(response);
     }
 
     /**
      */
-    async member(requestParameters: MemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MemberResponseQzResponse> {
+    async member(requestParameters: MemberRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<object> {
         const response = await this.memberRaw(requestParameters, initOverrides);
         return await response.value();
     }

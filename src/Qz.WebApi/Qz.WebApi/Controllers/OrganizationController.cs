@@ -11,33 +11,29 @@ namespace Qz.WebApi.Controllers
     public class OrganizationController : BaseController
     {
         private readonly ILogger<OrganizationController> _logger;
-        private readonly IMediator mediator;
 
-        public OrganizationController(ILogger<OrganizationController> logger, IMediator mediator)
+        public OrganizationController(IMediator mediator, ILogger<OrganizationController> logger) : base(mediator)
         {
             _logger = logger;
-            this.mediator = mediator;
         }
 
         [HttpPut]
-        public async Task<QzResponse<CreateOrganizationResponse>> CreateOrganization(CreateOrganizationRequest request)
+        public async Task<CreateOrganizationResponse> CreateOrganization(CreateOrganizationRequest request)
         {
             request.UserId = CurrentUser.UserId;
-            var res = await mediator.Send(request);
-            return Success(res);
+            return await RequestAsync<CreateOrganizationRequest, CreateOrganizationResponse>(request);
         }
 
         [HttpDelete]
-        public QzResponse<string> DeleteOrganization([Range(1, double.MaxValue)] long Id)
+        public IActionResult DeleteOrganization([Range(1, double.MaxValue)] long Id)
         {
-            return Success($"deleted");
+            return Content($"deleted");
         }
 
         [HttpGet]
-        public async Task<QzResponse<ListOrgResponse>> ListOrganizations()
+        public async Task<ListOrgResponse> ListOrganizations()
         {
-            var res = await mediator.Send(new ListOrgCommand { UserId = CurrentUser.UserId });
-            return Success(res);
+            return await RequestAsync<ListOrgCommand, ListOrgResponse>(new ListOrgCommand { UserId = CurrentUser.UserId });
         }
 
     }

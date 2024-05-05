@@ -31,7 +31,7 @@ function DataTable() {
             </TableHeader>
 
             <TableBody>
-                {data?.data?.issues?.map(x => {
+                {data?.issues?.map(x => {
                     return <TableRow key={x.id}>
                         <TableCell><Link to={`/projects/${x.orgId}/issue/${x.id}`}>#{x.id}</Link></TableCell>
                         <TableCell><Link to={`/projects/${x.orgId}/issue/${x.id}`}>{x.issueTitle}</Link></TableCell>

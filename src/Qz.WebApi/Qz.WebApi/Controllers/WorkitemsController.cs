@@ -9,25 +9,18 @@ namespace Qz.WebApi.Controllers
     [Route("api/Organization/{organizationId}/[controller]")]
     public class WorkitemsController : BaseController
     {
-        private readonly ILogger<WorkitemsController> _logger;
-        private readonly IMediator mediator;
-
-        public WorkitemsController(ILogger<WorkitemsController> logger, IMediator mediator)
+        public WorkitemsController(IMediator mediator) : base(mediator)
         {
-            _logger = logger;
-            this.mediator = mediator;
         }
 
         [HttpGet("MyIssue")]
-        public async Task<QzResponse<MyIssueResponse>> MyIssueAsync([Required] long organizationId)
+        public async Task<MyIssueResponse> MyIssueAsync([Required] long organizationId)
         {
-            var res = await mediator.Send(new MyIssueCommand()
+            return await RequestAsync<MyIssueCommand, MyIssueResponse>(new MyIssueCommand()
             {
                 OrgId = organizationId,
                 UserId = CurrentUser.UserId
             });
-
-            return Success(res);
         }
 
         // POST /organization/{organizationId}/workitems/create

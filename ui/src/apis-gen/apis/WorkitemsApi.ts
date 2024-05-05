@@ -15,11 +15,11 @@
 
 import * as runtime from '../runtime';
 import type {
-  MyIssueResponseQzResponse,
+  MyIssueResponse,
 } from '../models/index';
 import {
-    MyIssueResponseQzResponseFromJSON,
-    MyIssueResponseQzResponseToJSON,
+    MyIssueResponseFromJSON,
+    MyIssueResponseToJSON,
 } from '../models/index';
 
 export interface MyIssueRequest {
@@ -33,7 +33,7 @@ export class WorkitemsApi extends runtime.BaseAPI {
 
     /**
      */
-    async myIssueRaw(requestParameters: MyIssueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MyIssueResponseQzResponse>> {
+    async myIssueRaw(requestParameters: MyIssueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MyIssueResponse>> {
         if (requestParameters['organizationId'] == null) {
             throw new runtime.RequiredError(
                 'organizationId',
@@ -52,12 +52,12 @@ export class WorkitemsApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => MyIssueResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => MyIssueResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async myIssue(requestParameters: MyIssueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MyIssueResponseQzResponse> {
+    async myIssue(requestParameters: MyIssueRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MyIssueResponse> {
         const response = await this.myIssueRaw(requestParameters, initOverrides);
         return await response.value();
     }

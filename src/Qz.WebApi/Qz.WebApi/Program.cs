@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Qz.Application;
 using Qz.Application.Base;
@@ -19,13 +17,9 @@ using Qz.Persistence.Maper;
 using Qz.Persistence.Repositorys;
 using Qz.WebApi.Filters;
 using Qz.WebApi.Json;
-using Qz.WebApi.Services;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System.Reflection;
-using System.Reflection.Metadata;
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,13 +28,10 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(delegate (ApiBehav
 {
     options.InvalidModelStateResponseFactory = delegate (ActionContext context)
     {
-        string arg = string.Join('\n', context.ModelState.Select<KeyValuePair<string, ModelStateEntry>, string>((KeyValuePair<string, ModelStateEntry> x) => x.Value.Errors.FirstOrDefault()?.ErrorMessage));
-        return new JsonResult(new QzResponse<object>
-        {
-            Success = false,
-            Message = arg,
-            TraceId = context.HttpContext.TraceIdentifier
-        });
+        var errors = context.ModelState.Select((x) => new KeyValuePair<string, string[]>(x.Key, x.Value.Errors.ToArray().Select(x => x.ErrorMessage).ToArray()));
+        var res = new JsonResult(new ErrorInfo("²ÎÊýÐ£ÑéÊ§°Ü", errors.ToDictionary(), context.HttpContext.TraceIdentifier));
+        res.StatusCode = StatusCodes.Status200OK;
+        return res;
     };
 }).AddJsonOptions(options =>
 {
@@ -72,19 +63,10 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", null, delega
         OnChallenge = async delegate (JwtBearerChallengeContext context)
         {
             context.HandleResponse();
+
             context.Response.ContentType = "application/json;charset=utf-8";
-            var msg = context.Error ?? "Î´µÇÂ¼";
-
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new JsonLongConverter());
-            options.NumberHandling = JsonNumberHandling.AllowReadingFromString;
-
-            await context.Response.WriteAsync(JsonSerializer.Serialize(new QzResponse<object>
-            {
-                Success = false,
-                TraceId = context.HttpContext.TraceIdentifier,
-                Message = msg
-            }, options));
+            context.Response.StatusCode = StatusCodes.Status200OK;
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new ErrorInfo(context.Error ?? "Î´µÇÂ¼", null, context.HttpContext.TraceIdentifier), new JsonSerializerOptions(JsonSerializerDefaults.Web)));
         },
     };
 });

@@ -16,16 +16,16 @@
 import * as runtime from '../runtime';
 import type {
   LoginCommand,
-  LoginResponseQzResponse,
+  LoginResponse,
 } from '../models/index';
 import {
     LoginCommandFromJSON,
     LoginCommandToJSON,
-    LoginResponseQzResponseFromJSON,
-    LoginResponseQzResponseToJSON,
+    LoginResponseFromJSON,
+    LoginResponseToJSON,
 } from '../models/index';
 
-export interface LoginRequest {
+export interface GetTokenRequest {
     loginCommand?: LoginCommand;
 }
 
@@ -36,7 +36,7 @@ export class UserApi extends runtime.BaseAPI {
 
     /**
      */
-    async loginRaw(requestParameters: LoginRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoginResponseQzResponse>> {
+    async getTokenRaw(requestParameters: GetTokenRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<LoginResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -44,20 +44,20 @@ export class UserApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         const response = await this.request({
-            path: `/api/User/Login`,
+            path: `/api/User/GetToken`,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
             body: LoginCommandToJSON(requestParameters['loginCommand']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => LoginResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => LoginResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async login(requestParameters: LoginRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LoginResponseQzResponse> {
-        const response = await this.loginRaw(requestParameters, initOverrides);
+    async getToken(requestParameters: GetTokenRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<LoginResponse> {
+        const response = await this.getTokenRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

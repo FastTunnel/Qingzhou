@@ -16,19 +16,16 @@
 import * as runtime from '../runtime';
 import type {
   CreateOrganizationRequest,
-  CreateOrganizationResponseQzResponse,
-  ListOrgResponseQzResponse,
-  StringQzResponse,
+  CreateOrganizationResponse,
+  ListOrgResponse,
 } from '../models/index';
 import {
     CreateOrganizationRequestFromJSON,
     CreateOrganizationRequestToJSON,
-    CreateOrganizationResponseQzResponseFromJSON,
-    CreateOrganizationResponseQzResponseToJSON,
-    ListOrgResponseQzResponseFromJSON,
-    ListOrgResponseQzResponseToJSON,
-    StringQzResponseFromJSON,
-    StringQzResponseToJSON,
+    CreateOrganizationResponseFromJSON,
+    CreateOrganizationResponseToJSON,
+    ListOrgResponseFromJSON,
+    ListOrgResponseToJSON,
 } from '../models/index';
 
 export interface CreateOrganizationOperationRequest {
@@ -46,7 +43,7 @@ export class OrganizationApi extends runtime.BaseAPI {
 
     /**
      */
-    async createOrganizationRaw(requestParameters: CreateOrganizationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateOrganizationResponseQzResponse>> {
+    async createOrganizationRaw(requestParameters: CreateOrganizationOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateOrganizationResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -61,19 +58,19 @@ export class OrganizationApi extends runtime.BaseAPI {
             body: CreateOrganizationRequestToJSON(requestParameters['createOrganizationRequest']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateOrganizationResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CreateOrganizationResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async createOrganization(requestParameters: CreateOrganizationOperationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateOrganizationResponseQzResponse> {
+    async createOrganization(requestParameters: CreateOrganizationOperationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateOrganizationResponse> {
         const response = await this.createOrganizationRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
      */
-    async deleteOrganizationRaw(requestParameters: DeleteOrganizationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<StringQzResponse>> {
+    async deleteOrganizationRaw(requestParameters: DeleteOrganizationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
         const queryParameters: any = {};
 
         if (requestParameters['id'] != null) {
@@ -89,19 +86,18 @@ export class OrganizationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => StringQzResponseFromJSON(jsonValue));
+        return new runtime.VoidApiResponse(response);
     }
 
     /**
      */
-    async deleteOrganization(requestParameters: DeleteOrganizationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<StringQzResponse> {
-        const response = await this.deleteOrganizationRaw(requestParameters, initOverrides);
-        return await response.value();
+    async deleteOrganization(requestParameters: DeleteOrganizationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteOrganizationRaw(requestParameters, initOverrides);
     }
 
     /**
      */
-    async listOrganizationsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListOrgResponseQzResponse>> {
+    async listOrganizationsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListOrgResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -113,12 +109,12 @@ export class OrganizationApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => ListOrgResponseQzResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ListOrgResponseFromJSON(jsonValue));
     }
 
     /**
      */
-    async listOrganizations(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListOrgResponseQzResponse> {
+    async listOrganizations(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListOrgResponse> {
         const response = await this.listOrganizationsRaw(initOverrides);
         return await response.value();
     }

@@ -9,35 +9,33 @@ namespace Qz.WebApi.Controllers
 {
     public class TodoItemController : BaseController
     {
-        private readonly ILogger<TodoItemController> _logger;
-
-        public TodoItemController(ILogger<TodoItemController> logger)
+        public TodoItemController(IMediator mediator)
+            : base(mediator)
         {
-            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<QzResponse<TodoItemResponse>> Get([FromServices] IMediator mediator, [Range(1, double.MaxValue)] long Id)
+        public async Task<TodoItemResponse> Get([FromServices] IMediator mediator, [Range(1, double.MaxValue)] long Id)
         {
-            return Success(await mediator.Send(new GetTodoItemsQuery { Id = Id }));
+            return await RequestAsync<GetTodoItemsQuery, TodoItemResponse>(new GetTodoItemsQuery { Id = Id });
         }
 
         [HttpPut]
-        public QzResponse<string> Put(TodoDto item)
+        public IActionResult Put(TodoDto item)
         {
-            return Success($"insert");
+            return Content($"insert");
         }
 
         [HttpPost]
-        public QzResponse<string> Post(TodoDto item)
+        public IActionResult Post(TodoDto item)
         {
-            return Success($"updated");
+            return Content($"updated");
         }
 
         [HttpDelete]
-        public QzResponse<string> Delete(long Id)
+        public IActionResult Delete(long Id)
         {
-            return Success($"deleted");
+            return Content($"deleted");
         }
     }
 }
